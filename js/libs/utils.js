@@ -306,7 +306,8 @@ function getWitnessRanks() {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
-      url: "https://api.steemplus.app/witnesses-ranks",
+      // url: "https://api.steemplus.app/witnesses-ranks",
+      url:'http://www.steemservice.com:3000/keychain/witnesses',
       success: function(response) {
         resolve(response);
       },
@@ -580,7 +581,9 @@ function getDelegators(name) {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
-      url: "https://api.steemplus.app/delegators/" + name,
+      // url: "https://api.steemplus.app/delegators/" + name,
+      url:'http://www.steemservice.com:3000/keychain/delegator/' + name,
+      // url:'http://localhost:3000/keychain/delegator/' + name,
       success: function(incomingDelegations) {
         fulfill(incomingDelegations);
       },
