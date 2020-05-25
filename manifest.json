@@ -2,7 +2,7 @@
   "name": "SteemKeychain",
   "description": "Steem keychain",
   "default_locale": "en",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "permissions": [
     "activeTab",
     "declarativeContent",
