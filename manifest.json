@@ -2,17 +2,9 @@
   "name": "SteemKeychain",
   "description": "Steem keychain",
   "default_locale": "en",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "permissions": [
-    "activeTab",
-    "declarativeContent",
-    "storage",
-    "webNavigation",
-    "tabs",
-    "https://*/*",
-    "notifications",
-    "idle",
-    "contextMenus"
+    "activeTab"
   ],
   "browser_action": {
     "default_popup": "html/popup.html",
