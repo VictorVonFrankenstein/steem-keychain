@@ -2,7 +2,7 @@
   "name": "SteemKeychain",
   "description": "Steem keychain",
   "default_locale": "en",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "permissions": [
     "activeTab",
     "storage"
@@ -61,7 +61,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://*/*", "http://0.0.0.0:1337/*", "http://*/*"
+        "https://*/*", "http://*/*"
       ],
       "js": ["vendor/jquery.min.js", "js/web_interface.js", "js/libs/keychainify.js", "js/keychainify_content.js"]
     }

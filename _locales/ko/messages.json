@@ -120,7 +120,7 @@
     "message": "임대"
   },
   "popup_html_estimation": {
-    "message": "계정 보유 자산 예상 가치",
+    "message": "계정 보유자산 예상가치",
     "description": "on popup main page"
   },
   "popup_html_history": {
@@ -1148,7 +1148,7 @@
     "message": "키를 확인할 수 없습니다."
   },
   "bgd_ops_broadcast": {
-    "message": "트랜잭션 브로드캐스트 성공"
+    "message": "트랜잭션 브로드캐스트 성공!"
   },
   "bgd_ops_create_account": {
     "message": "@$1 계정 생성 성공."
