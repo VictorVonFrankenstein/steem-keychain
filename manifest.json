@@ -2,18 +2,20 @@
   "name": "SteemKeychain",
   "description": "Steem keychain",
   "default_locale": "en",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "permissions": [
     "activeTab",
     "storage"
   ],
   "browser_action": {
     "default_popup": "html/popup.html",
-    "default_icon": "steemicon_small.png"
+    "default_icon": "images/steemicon_200.png"
   },
   "icons": {
-    "16": "steemicon_small.png",
-    "32": "steemicon_small.png"
+    "16": "images/steemicon_16.png",
+    "32": "images/steemicon_32.png",
+    "48": "images/steemicon_48.png",
+    "128": "images/steemicon_128.png"
   },
   "background": {
     "scripts": [
