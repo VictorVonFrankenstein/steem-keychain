@@ -133,6 +133,19 @@ class Account {
     return transfers;
   }
 
+  async getComments() {
+    const result = await steem.api.getAccountHistoryAsync(
+      this.getName(),
+      -1,
+      1000
+    );
+    let transfers = result.filter(tx => tx[1].op[0] === "comment" 
+                                  && tx[1].op[1].parent_author !== ""  
+                                  && tx[1].op[1].author !== this.getName());
+    transfers = transfers.slice(-30).reverse();
+    return transfers;
+  }
+
   async getPowerDown() {
     const totalSteem = Number(
       (await this.props.getProp("total_vesting_fund_steem")).split(" ")[0]

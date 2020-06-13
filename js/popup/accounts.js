@@ -62,6 +62,7 @@ const loadAccount = async (name) => {
   showTokenBalances();
   proposeWitnessVote(witness_votes, proxy);
   getAccountHistory();
+  getAccountComments();
 };
 
 // Display all the account data
@@ -133,6 +134,44 @@ const getAccountHistory = async () => {
       var memo_element = $("<div class='memo'></div>");
       memo_element.text(memo);
       transfers_element.append(memo_element);
+      // $("#acc_transfers div").eq(1).append(transfers_element);
+    }
+    $(".transfer_row").click(function () {
+      $(".memo").eq($(this).index()).slideToggle();
+    });
+  } else
+    $("#acc_transfers div")
+      .eq(1)
+      .append(`<div class="transfer_row">${NO_RECENT_TRANSFERS}</div>`);
+};
+
+const getAccountComments = async () => {
+  const transfers = await activeAccount.getComments();
+  console.log(transfers);
+  $("#acc_transfers div").eq(1).empty();
+  if (transfers.length != 0) {
+    for (transfer of transfers) {
+      let author = transfer[1].op[1].author;
+      let comment = transfer[1].op[1].body;
+      let permlink = transfer[1].op[1].parent_permlink;
+      let timestamp = transfer[1].timestamp;
+      let date = new Date(timestamp);
+      timestamp =
+        date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+
+      var transfers_element = $(
+        "<div class='transfer_row'><span class='transfer_date' title='" +
+          transfer[1].timestamp +
+          "'>" +
+          timestamp +
+          "</span><span class='transfer_name'>" +
+          author +
+          "</span><div>" +
+          'Link:' + permlink +
+          "</div><div>" +
+          comment +
+          "</div></div>"
+      );
       $("#acc_transfers div").eq(1).append(transfers_element);
     }
     $(".transfer_row").click(function () {
@@ -143,6 +182,7 @@ const getAccountHistory = async () => {
       .eq(1)
       .append(`<div class="transfer_row">${NO_RECENT_TRANSFERS}</div>`);
 };
+
 // Adding accounts. Private keys can be entered individually or by the mean of the
 // master key, in which case user can chose which keys to store, mk will then be
 // discarded.
