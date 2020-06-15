@@ -147,6 +147,10 @@
     "message": "Historique du portefeuille",
     "description": "Upon clicking on History"
   },
+  "popup_html_comment_history": {
+    "message": "Historique des commentaires",
+    "description": "Upon clicking on Comments"
+  },
   "popup_html_setup_text": {
     "message": "Entrez ci-dessous le nom de votre compte Steem et le mot de passe principal ou la clé privée active ou de publication pour le compte. Votre mot de passe principal ne sera PAS sauvegardé et ne sera utilisé que pour générer vos clés privées.<br/><br/> Vous pouvez ajouter/supprimer des comptes Steem ou des clés à tout moment. Si vous devez créer un nouveau compte Steem, vous pouvez le faire sur <a href=\"https://signup.steemit.com/\" target=\"_blank\" style=\"text-decoration: underline; color: white;\">https://signup.steemit.com/</a>.",
     "description": "When adding new account"

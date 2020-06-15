@@ -147,6 +147,10 @@
     "message": "錢包歷史紀錄",
     "description": "Upon clicking on History"
   },
+  "popup_html_comment_history": {
+    "message": "評論歷史",
+    "description": "Upon clicking on Comments"
+  },
   "popup_html_setup_text": {
     "message": "在下面輸入您的Steem帳戶名稱以及該帳戶的主密碼或私人貼文或活躍私鑰。 您的主密碼將不會保存，只會使用於生成私鑰。<br/> <br/>您可以隨時新增/刪除Steem帳戶或私鑰。 如果您需要建立一個新的Steem帳戶，可以在<a href =“ https://signup.steemit.com/” target =“ _ blank” style =“ text-decoration：underline; color：white;”中進行。 > https://signup.steemit.com/ </a>。",
     "description": "When adding new account"

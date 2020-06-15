@@ -147,6 +147,10 @@
     "message": "지갑 내역",
     "description": "Upon clicking on History"
   },
+  "popup_html_comment_history": {
+    "message": "댓글 내역",
+    "description": "Upon clicking on Comments"
+  },
   "popup_html_setup_text": {
     "message": "스팀 계정 이름을 입력하고 마스터 비밀번호, 개인 포스팅 키, 개인 액티브 키 가운데 하나를 개인 키 란에 입력하세요. 마스터 비밀번호는 저장되지 않으며, 개인 키 생성 목적으로만 사용될 것입니다.<br/><br/> 언제든지 스팀 계정 또는 키를 추가하거나 삭제할 수 있습니다. 새로운 스팀 계정을 만들고 싶은 경우, <a href=\"https://signup.steemit.com/\" target=\"_blank\" style=\"text-decoration: underline; color: white;\">https://signup.steemit.com/</a>을 통해 계정 생성을 진행할 수 있습니다.",
     "description": "When adding new account"
@@ -520,7 +524,7 @@
     "description": "if account consults history and there s an encrypted memo, but no memo key for the account"
   },
   "popup_accounts_no_recent_transfers": {
-    "message": "최근 전송 내역이 없습니다",
+    "message": "최근 데이터가 없습니다",
     "description": "if history is empty"
   },
   "popup_accounts_already_registered": {

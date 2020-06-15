@@ -236,6 +236,12 @@ $("#history").click(function() {
   $("#main").hide();
 });
 
+// Show transaction comments window
+$("#comments").click(function() {
+  $("#acc_comments").show();
+  $("#main").hide();
+});
+
 $("#tokens").click(function() {
   $("#tokens_div").show();
   $("#main").hide();

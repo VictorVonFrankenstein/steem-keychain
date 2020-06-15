@@ -53,9 +53,14 @@ $("#send").text(chrome.i18n.getMessage("popup_html_send_transfer"));
 $("#history").text(chrome.i18n.getMessage("popup_html_history"));
 $("#tokens").text(chrome.i18n.getMessage("popup_html_tokens"));
 $("#witness").text(chrome.i18n.getMessage("popup_html_witness"));
+$("#comments").text(chrome.i18n.getMessage("popup_html_comment_history"));
 
 $("#acc_transfers .back_menu").text(
   chrome.i18n.getMessage("popup_html_wallet_history")
+);
+
+$("#acc_comments .back_menu").text(
+  chrome.i18n.getMessage("popup_html_comment_history")
 );
 
 // Set up

@@ -134,7 +134,7 @@ const getAccountHistory = async () => {
       var memo_element = $("<div class='memo'></div>");
       memo_element.text(memo);
       transfers_element.append(memo_element);
-      // $("#acc_transfers div").eq(1).append(transfers_element);
+      $("#acc_transfers div").eq(1).append(transfers_element);
     }
     $(".transfer_row").click(function () {
       $(".memo").eq($(this).index()).slideToggle();
@@ -148,7 +148,7 @@ const getAccountHistory = async () => {
 const getAccountComments = async () => {
   const transfers = await activeAccount.getComments();
   console.log(transfers);
-  $("#acc_transfers div").eq(1).empty();
+  $("#acc_comments div").eq(1).empty();
   if (transfers.length != 0) {
     for (transfer of transfers) {
       let author = transfer[1].op[1].author;
@@ -160,7 +160,7 @@ const getAccountComments = async () => {
         date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
       var transfers_element = $(
-        "<div class='transfer_row'><span class='transfer_date' title='" +
+        "<div class='comment_row' permlink='" + permlink + "'><span class='transfer_date' title='" +
           transfer[1].timestamp +
           "'>" +
           timestamp +
@@ -172,15 +172,15 @@ const getAccountComments = async () => {
           comment +
           "</div></div>"
       );
-      $("#acc_transfers div").eq(1).append(transfers_element);
+      $("#acc_comments div").eq(1).append(transfers_element);
     }
-    $(".transfer_row").click(function () {
-      $(".memo").eq($(this).index()).slideToggle();
+    $(".comment_row").click(function () {
+      // location.href = '/' + $(this).attr('permlink');
     });
   } else
-    $("#acc_transfers div")
+    $("#acc_comments div")
       .eq(1)
-      .append(`<div class="transfer_row">${NO_RECENT_TRANSFERS}</div>`);
+      .append(`<div class="comment_row">${NO_RECENT_TRANSFERS}</div>`);
 };
 
 // Adding accounts. Private keys can be entered individually or by the mean of the
