@@ -166,9 +166,9 @@ const getAccountComments = async () => {
           timestamp +
           "</span><span class='transfer_name'>" +
           author +
-          "</span><div>" +
+          `</span><div><a target="#" href="https://steemit.com/@${activeAccount.getName()}/${permlink}" ` +
           'Link:' + permlink +
-          "</div><div>" +
+          "</a></div><div>" +
           comment +
           "</div></div>"
       );

@@ -881,12 +881,12 @@ input:focus {
 
 .main-button:nth-child(even) {
   margin-right: 28px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .main-button:nth-of-type(1),
 .main-button:nth-of-type(2) {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 #send {
