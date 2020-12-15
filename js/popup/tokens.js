@@ -1,9 +1,9 @@
 let tokens = [];
 let accountTokenBalances = [];
-const urlSSC = ["https://api.steem-engine.com/rpc"];
+const urlSSC = ["https://steemapi.cryptoempirebot.com/rpc"];
 const ssc = new SSC(urlSSC[0]);
 let hidden_tokens = [];
-const steemEngine = "https://api.steem-engine.com/accounts";
+const steemEngine = "https://steemapi.cryptoempirebot.com/accounts";
 const CHAIN_ID = config.mainNet;
 // TODO : extract token logic
 chrome.storage.local.get(["hidden_tokens"], function(items) {
