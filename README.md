@@ -1,5 +1,5 @@
-![](https://i.imgur.com/4rPWDFs.png)
----
+## ![](https://i.imgur.com/4rPWDFs.png)
+
 Putting private keys directly into websites is not safe or secure. Even ones run by SteemIt, Inc. Yet this is currently how nearly every Steem-based site or service currently works. On top of that, most Steem users likely use their master password which is even worse
 
 The Vessel desktop wallet software is a secure alternative, but it is too difficult to use for the majority of Steem users and does not easily interact with websites - which is Steem's primary use case.
@@ -9,13 +9,17 @@ On Ethereum, you never have to enter your private key into a website to use a dA
 Steem Keychain aims to bring the security and ease-of-use of Metamask to the Steem blockchain platform.
 
 ## Installation
+
 You can download and install the latest published version of the extension for the following browsers:
 
-- Google Chrome (or Brave): [https://chrome.google.com/webstore/detail/steem-keychain/lkcjlnjfpbikmcmbachjpdbijejflpcm](https://chrome.google.com/webstore/detail/steem-keychain/lkcjlnjfpbikmcmbachjpdbijejflpcm)
-- Firefox: [https://addons.mozilla.org/en-US/firefox/addon/steem-keychain/](https://addons.mozilla.org/en-US/firefox/addon/steem-keychain/)
+- Google Chrome (or Brave): [
+  https://chrome.google.com/webstore/detail/steemkeychain/jhgnbkkipaallpehbohjmkbjofjdmeid?hl=en](https://chrome.google.com/webstore/detail/steemkeychain/jhgnbkkipaallpehbohjmkbjofjdmeid?hl=en)
+- Firefox: [https://addons.mozilla.org/en-US/firefox/addon/steem-keychain/(made by @Yabapmatt)](https://addons.mozilla.org/en-US/firefox/addon/steem-keychain/)
 
 ## Features
+
 The Steem Keychain extension includes the following features:
+
 - Store an unlimited number of Steem account keys, encrypted with AES
 - View balances, transaction history, voting power, and resource credits
 - Send STEEM and SBD transfers, manage witness votes, and update SP delegation right from the extension
@@ -24,7 +28,9 @@ The Steem Keychain extension includes the following features:
 - Locks automatically on browser shutdown or manually using the lock button
 
 ## Website Integration
+
 Websites can currently request the Steem Keychain extension to perform the following functions / broadcast operations:
+
 - Send a handshake to make sure the extension is installed
 - Decrypt a message encrypted by a Steem account private key (commonly used for "logging in")
 - Post a comment (top level or reply)
@@ -76,6 +82,7 @@ steem_keychain.requestTransfer(account_name, to_account, amount, memo, currency,
 	console.log(response);
 },enforce);
 ```
+
 where `memo` will be encrypted using Memo key if it is starting by `#`, and `enforce` doesn't allow the user to chose which account will make the transfer but rather enforce `account_name`.
 
 ### Decode Memo / Verify Key
@@ -134,12 +141,12 @@ steem_keychain.requestSignBuffer(account_name, message, key_type, function(respo
 
 Where "message" is any string and "key_type" can be "Posting" or "Active". This is equivalent to
 
-```Signature.signBufferSha256(hash.sha256(message), wif).toHex();```
+`Signature.signBufferSha256(hash.sha256(message), wif).toHex();`
 
 You can also pass in a JSON-stringified Node.js Buffer object. For example, if `buffer` is a Node.js Buffer
 to be signed, you can pass `JSON.stringify(buffer)` as `message`, then this method becomes equivalent to
 
-```Signature.signBufferSha256(hash.sha256(buffer), wif).toHex();```
+`Signature.signBufferSha256(hash.sha256(buffer), wif).toHex();`
 
 ### Add Account Authority
 
@@ -259,5 +266,5 @@ Where `amount` is expressed in SP for more visibility for the user.
 
 ## Related Projects
 
-* [ngx-steem-keychain](https://github.com/steeveproject/ngx-steem-keychain) -
+- [ngx-steem-keychain](https://github.com/steeveproject/ngx-steem-keychain) -
   Native [Angular](https://angular.io) framework integration.

@@ -1,9 +1,13 @@
 const prepareDelegationTab = async () => {
+  console.log("start prepareDelegationTab============");
+
   const [delegatees, delegators] = [
     await activeAccount.getDelegatees(),
-    await activeAccount.getDelegators()
+    await activeAccount.getDelegators(),
   ];
-  console.log(delegatees, delegators);
+
+  console.log("delegatees, delegators", delegatees, delegators);
+
   if (!activeAccount.hasKey("active")) {
     $("#send_del").addClass("disabled");
     $("#wrap_send_del").attr(
@@ -28,13 +32,13 @@ const prepareDelegationTab = async () => {
 
   $("#send_del")
     .unbind("click")
-    .click(function() {
+    .click(function () {
       $("#send_del").hide();
       $("#del_loading").show();
       activeAccount.delegateSP(
         $("#amt_del").val(),
         $("#username_del").val(),
-        function(err, result) {
+        function (err, result) {
           console.log(err, result);
           $("#send_del").show();
           $("#del_loading").hide();
@@ -50,20 +54,21 @@ const prepareDelegationTab = async () => {
 };
 
 function getSumOutgoing(delegatees) {
-  return delegatees.reduce(function(total, elt) {
+  console.log("getSumOutgoing(delegatees)", delegatees);
+  return delegatees.reduce(function (total, elt) {
     return total + parseFloat(elt.sp);
   }, 0);
 }
 
 function getSumIncoming(delegators) {
-  return delegators.reduce(function(total, elt) {
+  return delegators.reduce(function (total, elt) {
     return total + parseFloat(elt.sp);
   }, 0);
 }
 
-const displayIncomingDelegations = delegators => {
+const displayIncomingDelegations = (delegators) => {
   const sumIncoming = getSumIncoming(delegators);
-  delegators = delegators.sort(function(a, b) {
+  delegators = delegators.sort(function (a, b) {
     return b.sp - a.sp;
   });
   $("#total_incoming span")
@@ -93,7 +98,7 @@ const displayDelegationMain = async (delegators, delegatees) => {
   );
 };
 
-const displayOutgoingDelegations = delegatees => {
+const displayOutgoingDelegations = (delegatees) => {
   const sumOutgoing = getSumOutgoing(delegatees);
   $("#total_outgoing span")
     .eq(1)
@@ -111,26 +116,21 @@ const displayOutgoingDelegations = delegatees => {
 
   $(".line_outgoing img")
     .unbind("click")
-    .click(function() {
+    .click(function () {
       $("#outgoing_del_div").hide();
       $("#edit_del_div").show();
       let that = $(this);
-      let this_delegatee = delegatees.filter(function(elt) {
+      let this_delegatee = delegatees.filter(function (elt) {
         return (
           elt.delegatee ==
-          that
-            .parent()
-            .children()
-            .eq(0)
-            .html()
-            .replace("@", "")
+          that.parent().children().eq(0).html().replace("@", "")
         );
       });
       showEditDiv(this_delegatee);
     });
 };
 
-const showEditDiv = async delegatees => {
+const showEditDiv = async (delegatees) => {
   const delegatee = delegatees[0];
   $("#this_outgoing_del").html(
     numberWithCommas(parseFloat(delegatee.sp)) + " SP"
@@ -138,24 +138,21 @@ const showEditDiv = async delegatees => {
   $("#this_available_del").html(
     numberWithCommas(
       (
-        parseFloat(
-          $("#available_del")
-            .html()
-            .replace(",", "")
-        ) + parseFloat(delegatee.sp)
+        parseFloat($("#available_del").html().replace(",", "")) +
+        parseFloat(delegatee.sp)
       ).toFixed(3)
     ) + " SP"
   );
   $("#username_del span").html(delegatee.delegatee);
   $("#edit_del")
     .unbind("click")
-    .click(function() {
+    .click(function () {
       $("#edit_del").hide();
       $("#edit_del_loading").show();
       activeAccount.delegateSP(
         $("#amt_edit_del").val(),
         delegatee.delegatee,
-        function(err, result) {
+        function (err, result) {
           console.log(err, result);
           $("#edit_del").show();
           $("#edit_del_loading").hide();

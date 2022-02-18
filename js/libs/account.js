@@ -128,7 +128,7 @@ class Account {
       -1,
       1000
     );
-    let transfers = result.filter(tx => tx[1].op[0] === "transfer");
+    let transfers = result.filter((tx) => tx[1].op[0] === "transfer");
     transfers = transfers.slice(-10).reverse();
     return transfers;
   }
@@ -139,9 +139,12 @@ class Account {
       -1,
       1000
     );
-    let transfers = result.filter(tx => tx[1].op[0] === "comment" 
-                                  && tx[1].op[1].parent_author !== ""  
-                                  && tx[1].op[1].author !== this.getName());
+    let transfers = result.filter(
+      (tx) =>
+        tx[1].op[0] === "comment" &&
+        tx[1].op[1].parent_author !== "" &&
+        tx[1].op[1].author !== this.getName()
+    );
     transfers = transfers.slice(-30).reverse();
     return transfers;
   }
@@ -199,12 +202,14 @@ class Account {
   async getDelegatees() {
     const that = this;
     let delegatees = await this.delegatees;
-    delegatees = delegatees.filter(function(elt) {
+    delegatees = delegatees.filter(function (elt) {
       return elt.vesting_shares != 0;
     });
+
+    console.log("delegatees", delegatees);
     if (delegatees.length > 0)
       delegatees = await Promise.all(
-        delegatees.map(async elt => {
+        delegatees.map(async (elt) => {
           elt.sp = parseFloat(
             await this.toSP(
               parseFloat(elt.vesting_shares.replace(" VESTS", ""))
@@ -215,15 +220,22 @@ class Account {
       );
     return delegatees;
   }
+
   async getDelegators() {
+    console.log("start getDelegators=-=-=-=-");
     const that = this;
+    console.log("start getDelegators=-=-=-=-2");
     let delegators = await this.delegators;
-    delegators = delegators.filter(function(elt) {
+    console.log("start getDelegators=-=-=-=-3");
+    delegators = delegators.filter(function (elt) {
+      console.log("start getDelegators=-=-=-=-5");
       return elt.vesting_shares != 0;
     });
+    console.log("start getDelegators=-=-=-=-4");
+    console.log("delegators", delegators);
     if (delegators.length > 0)
       delegators = await Promise.all(
-        delegators.map(async elt => {
+        delegators.map(async (elt) => {
           const sp = await that.toSP(elt.vesting_shares + " VESTS");
           elt.sp = parseFloat(sp).toFixed(3);
           return elt;
@@ -231,6 +243,7 @@ class Account {
       );
     return delegators;
   }
+
   async delegateSP(amount, to, callback) {
     const totalSteem = Number(
       (await this.props.getProp("total_vesting_fund_steem")).split(" ")[0]

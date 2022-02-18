@@ -2,6 +2,9 @@ let witness_ranks = null;
 
 async function prepareWitnessDiv(witness_votes, proxy) {
   witness_ranks = await getWitnessRanks();
+
+  console.log("witness_ranks", witness_ranks);
+
   $("#votes_remaining span").html(30 - witness_votes.length);
   if (proxy != "") {
     $("#proxy div").html(`${chrome.i18n.getMessage("popup_proxy")}: @${proxy}`);
@@ -15,7 +18,7 @@ async function prepareWitnessDiv(witness_votes, proxy) {
   if (witness_votes) {
     for (wit of witness_votes) {
       const isActive =
-        witness_ranks && witness_ranks.find(e => e.name == wit)
+        witness_ranks && witness_ranks.find((e) => e.name == wit)
           ? "active"
           : "disabled";
       $("#list_wit").append(
@@ -57,13 +60,13 @@ async function prepareWitnessDiv(witness_votes, proxy) {
 
   $("#proxy div")
     .unbind("click")
-    .click(function() {
+    .click(function () {
       $("#proxy").hide();
       steem.broadcast.accountWitnessProxy(
         activeAccount.getKey("active"),
         activeAccount.getName(),
         "",
-        function(err, result) {
+        function (err, result) {
           console.log(err, result);
         }
       );
@@ -71,7 +74,7 @@ async function prepareWitnessDiv(witness_votes, proxy) {
 
   $(".wit-vote")
     .unbind("click")
-    .click(function() {
+    .click(function () {
       const voted_wit = $(this).hasClass("wit-voted");
       const that = this;
       console.log(voted_wit);
@@ -79,12 +82,9 @@ async function prepareWitnessDiv(witness_votes, proxy) {
       steem.broadcast.accountWitnessVote(
         activeAccount.getKey("active"),
         activeAccount.getName(),
-        $(this)
-          .prev()
-          .html()
-          .replace("@", ""),
+        $(this).prev().html().replace("@", ""),
         $(this).hasClass("wit-voted") ? 0 : 1,
-        function(err, result) {
+        function (err, result) {
           console.log(err, result);
           $(that).removeClass("wit-loading");
           if (err == null) {
@@ -110,12 +110,8 @@ async function prepareWitnessDiv(witness_votes, proxy) {
 
   $(".witness-row img")
     .unbind("click")
-    .click(function() {
-      const acc = $(this)
-        .parent()
-        .find(".witName")
-        .html()
-        .replace("@", "");
+    .click(function () {
+      const acc = $(this).parent().find(".witName").html().replace("@", "");
       const that = this;
       $(that).attr("src", "../images/loading.gif");
       steem.broadcast.accountWitnessVote(
@@ -123,7 +119,7 @@ async function prepareWitnessDiv(witness_votes, proxy) {
         activeAccount.getName(),
         acc,
         0,
-        function(err, result) {
+        function (err, result) {
           $(that).attr("src", "../images/delete.png");
           if (err == null) {
             showConfirm(
@@ -137,7 +133,7 @@ async function prepareWitnessDiv(witness_votes, proxy) {
 
   $("#vote_wit")
     .unbind("click")
-    .click(function() {
+    .click(function () {
       $("#vote_wit").hide();
       $("#wit_loading").show();
       if ($("#witness_div select option:selected").val() === "Wit") {
@@ -146,13 +142,13 @@ async function prepareWitnessDiv(witness_votes, proxy) {
           activeAccount.getName(),
           $("#wit-username").val(),
           1,
-          function(err, result) {
+          function (err, result) {
             $("#vote_wit").show();
             $("#wit_loading").hide();
             if (!err) {
               showConfirm(
                 chrome.i18n.getMessage("popup_success_wit", [
-                  $("#wit-username").val()
+                  $("#wit-username").val(),
                 ])
               );
               loadAccount(activeAccount.getName());
@@ -164,13 +160,13 @@ async function prepareWitnessDiv(witness_votes, proxy) {
           activeAccount.getKey("active"),
           activeAccount.getName(),
           $("#wit-username").val(),
-          function(err, result) {
+          function (err, result) {
             $("#wit_loading").hide();
             $("#vote_wit").show();
             if (!err) {
               showConfirm(
                 chrome.i18n.getMessage("popup_success_proxy", [
-                  $("#wit-username").val()
+                  $("#wit-username").val(),
                 ])
               );
               loadAccount(activeAccount.getName());

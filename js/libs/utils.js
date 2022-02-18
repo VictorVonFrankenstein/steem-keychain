@@ -574,6 +574,7 @@ function getDelegatees(name) {
 }
 
 function getDelegators(name) {
+  console.log();
   return new Promise(function(fulfill, reject) {
     $.ajax({
       type: "GET",

@@ -56,7 +56,7 @@ const loadAccount = async (name) => {
 
   showUserData();
   claimRewards();
-  prepareWitnessDiv(witness_votes, proxy);
+  // prepareWitnessDiv(witness_votes, proxy);
   prepareDelegationTab();
   preparePowerUpDown();
   showTokenBalances();
@@ -160,14 +160,17 @@ const getAccountComments = async () => {
         date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
       var transfers_element = $(
-        "<div class='comment_row' permlink='" + permlink + "'><span class='transfer_date' title='" +
+        "<div class='comment_row' permlink='" +
+          permlink +
+          "'><span class='transfer_date' title='" +
           transfer[1].timestamp +
           "'>" +
           timestamp +
           "</span><span class='transfer_name'>" +
           author +
           `</span><div><a target="#" href="https://steemit.com/@${activeAccount.getName()}/${permlink}" >` +
-          'Link:' + permlink +
+          "Link:" +
+          permlink +
           "</a></div><div>" +
           comment +
           "</div></div>"
@@ -573,12 +576,8 @@ const deleteAccount = (i) => {
 
 const claimRewards = async () => {
   console.log(`Check claim rewards for ${activeAccount.getName()}`);
-  const [
-    reward_sbd,
-    reward_sp,
-    reward_steem,
-    rewardText,
-  ] = await activeAccount.getAvailableRewards();
+  const [reward_sbd, reward_sp, reward_steem, rewardText] =
+    await activeAccount.getAvailableRewards();
   if (hasReward(reward_sbd, reward_sp, reward_steem)) {
     $("#claim_rewards button").prop("disabled", false);
     $("#claim").show();
