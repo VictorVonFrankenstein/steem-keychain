@@ -16,7 +16,7 @@ getMK();
 
 // Check if autolock and set it to background
 function sendAutolock() {
-  chrome.storage.local.get(["autolock"], function(items) {
+  chrome.storage.local.get(["autolock"], function (items) {
     if (items.autolock != undefined) {
       $(".autolock input").prop("checked", false);
       $("#" + JSON.parse(items.autolock).type).prop("checked", true);
@@ -31,7 +31,7 @@ function sendAutolock() {
 }
 
 function checkKeychainify() {
-  chrome.storage.local.get(["keychainify_enabled"], function(items) {
+  chrome.storage.local.get(["keychainify_enabled"], function (items) {
     if (items.keychainify_enabled !== undefined) {
       $(".enable_keychainify input").prop("checked", items.keychainify_enabled);
     } else {
@@ -41,45 +41,32 @@ function checkKeychainify() {
 }
 
 // Save autolock
-$(".autolock").click(function() {
+$(".autolock").click(function () {
   $(".autolock input").prop("checked", false);
-  $(this)
-    .find("input")
-    .prop("checked", "true");
+  $(this).find("input").prop("checked", "true");
   $("#mn").css(
     "visibility",
-    $(this)
-      .find("input")
-      .attr("id") == "idle"
-      ? "visible"
-      : "hidden"
+    $(this).find("input").attr("id") == "idle" ? "visible" : "hidden"
   );
 });
 
 // Save enable_keychainify
-$(".enable_keychainify").click(function() {
-  const enable_keychainify = $(this)
-    .find("input")
-    .prop("checked");
-  $(this)
-    .find("input")
-    .prop("checked", !enable_keychainify);
+$(".enable_keychainify").click(function () {
+  const enable_keychainify = $(this).find("input").prop("checked");
+  $(this).find("input").prop("checked", !enable_keychainify);
   chrome.storage.local.set({
-    keychainify_enabled: !enable_keychainify
+    keychainify_enabled: !enable_keychainify,
   });
 });
 
 // Saving autolock options
-$("#save_autolock").click(function() {
+$("#save_autolock").click(function () {
   const autolock = JSON.stringify({
-    type:
-      $(".autolock input:checkbox:checked")
-        .eq(0)
-        .attr("id") || "default",
-    mn: $("#mn").val() || 10
+    type: $(".autolock input:checkbox:checked").eq(0).attr("id") || "default",
+    mn: $("#mn").val() || 10,
   });
   chrome.storage.local.set({
-    autolock: autolock
+    autolock: autolock,
   });
   console.log("set");
   setAutolock(autolock);
@@ -88,7 +75,7 @@ $("#save_autolock").click(function() {
 });
 
 // Lock the wallet and destroy traces of the mk
-$("#lock").click(function() {
+$("#lock").click(function () {
   sendMk(null);
   accountsList.save(mk);
   $("#back_forgot_settings").attr("id", "back_forgot");
@@ -96,15 +83,15 @@ $("#lock").click(function() {
   showUnlock();
 });
 
-const sendMk = mk => {
+const sendMk = (mk) => {
   chrome.runtime.sendMessage({
     command: "sendMk",
-    mk
+    mk,
   });
 };
 // Unlock with masterkey and show the main menu
-$("#submit_unlock").click(function() {
-  chrome.storage.local.get(["accounts"], function(items) {
+$("#submit_unlock").click(function () {
+  chrome.storage.local.get(["accounts"], function (items) {
     const pwd = $("#unlock_pwd").val();
     const accs = decryptToJson(items.accounts, pwd);
     console.log(accs);
@@ -123,7 +110,7 @@ $("#submit_unlock").click(function() {
 });
 
 // If user forgot Mk, he can reset the wallet
-$("#forgot_div button").click(function() {
+$("#forgot_div button").click(function () {
   accountsList.clear();
   mk = null;
   $("#forgot_div").hide();
@@ -131,7 +118,7 @@ $("#forgot_div button").click(function() {
 });
 
 // Registration confirmation
-$("#submit_master_pwd").click(function() {
+$("#submit_master_pwd").click(function () {
   if (acceptMP($("#master_pwd").val())) {
     if ($("#master_pwd").val() == $("#confirm_master_pwd").val()) {
       mk = $("#master_pwd").val();
@@ -146,13 +133,15 @@ $("#submit_master_pwd").click(function() {
   }
 });
 function acceptMP(mp) {
-  return (
-    mp.length >= 16 ||
-    (mp.length >= 8 &&
-      mp.match(/.*[a-z].*/) &&
-      mp.match(/.*[A-Z].*/) &&
-      mp.match(/.*[0-9].*/))
-  );
+  // ???
+  return true;
+  // return (
+  //   mp.length >= 16 ||
+  //   (mp.length >= 8 &&
+  //     mp.match(/.*[a-z].*/) &&
+  //     mp.match(/.*[A-Z].*/) &&
+  //     mp.match(/.*[0-9].*/))
+  // );
 }
 // Set visibilities back to normal when coming back to main menu
 function initializeMainMenu() {
@@ -163,7 +152,7 @@ function initializeMainMenu() {
   getPref = false;
   chrome.storage.local.get(
     ["accounts", "last_account", "rpc", "current_rpc", "transfer_to"],
-    function(items) {
+    function (items) {
       to_autocomplete = items.transfer_to ? JSON.parse(items.transfer_to) : {};
       if (items.accounts)
         accountsList.init(
@@ -198,7 +187,7 @@ function initializeMainMenu() {
   );
 }
 // Show Confirmation window before transfer
-$("#send_transfer").click(function() {
+$("#send_transfer").click(function () {
   confirmTransfer();
 });
 
@@ -221,7 +210,7 @@ function confirmTransfer() {
 }
 
 // Send STEEM or SBD to an user
-$("#confirm_send_transfer").click(function() {
+$("#confirm_send_transfer").click(function () {
   showLoader();
   sendTransfer();
 });
@@ -236,16 +225,16 @@ function voteFor(name) {
       activeAccount.getName(),
       name,
       true,
-      function(err, result) {
+      function (err, result) {
         if (err == null) {
-          setTimeout(function() {
+          setTimeout(function () {
             if ($(".witness_container:visible").length == 0)
               $("#witness_votes").animate(
                 {
-                  opacity: 0
+                  opacity: 0,
                 },
                 500,
-                function() {
+                function () {
                   $("#witness_votes").hide();
                 }
               );
@@ -260,20 +249,14 @@ function voteFor(name) {
     $("#main").hide();
     $("#add_key_div").show();
     manageKey = true;
-    manageKeys(
-      $(".usernames .select-selected")
-        .eq(0)
-        .html()
-    );
+    manageKeys($(".usernames .select-selected").eq(0).html());
     showError(chrome.i18n.getMessage("popup_witness_key"));
   }
 }
 
 // Send a transfer
 async function sendTransfer() {
-  const to = $("#recipient")
-    .val()
-    .replace(" ", "");
+  const to = $("#recipient").val().replace(" ", "");
   const amount = $("#amt_send").val();
   const currency = $("#currency_send .select-selected").html();
   let memo = $("#memo_send").val();
@@ -298,51 +281,48 @@ async function sendTransfer() {
       to,
       parseFloat(amount).toFixed(3) + " " + currency,
       memo,
-      async function(err, result) {
+      async function (err, result) {
         $("#send_loader").hide();
         $("#confirm_send_transfer").show();
         if (err == null) {
           const sender = await steem.api.getAccountsAsync([
-            activeAccount.getName()
+            activeAccount.getName(),
           ]);
           sbd = sender["0"].sbd_balance.replace("SBD", "");
           steem_p = sender["0"].balance.replace("STEEM", "");
           $("#confirm_send_div").hide();
           $("#send_div").show();
           if (currency == "SBD") {
-            $(".transfer_balance div")
-              .eq(1)
-              .html(numberWithCommas(sbd));
+            $(".transfer_balance div").eq(1).html(numberWithCommas(sbd));
           } else if (currency == "STEEM") {
-            $(".transfer_balance div")
-              .eq(1)
-              .html(numberWithCommas(steem_p));
+            $(".transfer_balance div").eq(1).html(numberWithCommas(steem_p));
           }
           $(".error_div").hide();
           $(".success_div")
             .html(chrome.i18n.getMessage("popup_transfer_success"))
             .show();
-          chrome.storage.local.get({transfer_to: JSON.stringify({})}, function(
-            items
-          ) {
-            let transfer_to = JSON.parse(items.transfer_to);
-            if (!transfer_to[activeAccount.getName()])
-              transfer_to[activeAccount.getName()] = [];
-            console.log(transfer_to);
-            if (
-              transfer_to[activeAccount.getName()].filter(elt => {
-                return elt == to;
-              }).length == 0
-            )
-              transfer_to[activeAccount.getName()].push(to);
-            console.log(transfer_to);
+          chrome.storage.local.get(
+            { transfer_to: JSON.stringify({}) },
+            function (items) {
+              let transfer_to = JSON.parse(items.transfer_to);
+              if (!transfer_to[activeAccount.getName()])
+                transfer_to[activeAccount.getName()] = [];
+              console.log(transfer_to);
+              if (
+                transfer_to[activeAccount.getName()].filter((elt) => {
+                  return elt == to;
+                }).length == 0
+              )
+                transfer_to[activeAccount.getName()].push(to);
+              console.log(transfer_to);
 
-            console.log(JSON.stringify(transfer_to));
-            chrome.storage.local.set({
-              transfer_to: JSON.stringify(transfer_to)
-            });
-          });
-          setTimeout(function() {
+              console.log(JSON.stringify(transfer_to));
+              chrome.storage.local.set({
+                transfer_to: JSON.stringify(transfer_to),
+              });
+            }
+          );
+          setTimeout(function () {
             $(".success_div").hide();
           }, 5000);
         } else {

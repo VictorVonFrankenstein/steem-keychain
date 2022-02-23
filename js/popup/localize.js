@@ -433,6 +433,7 @@ $("#witness_toggle").text(chrome.i18n.getMessage("popup_html_support"));
 $("#add_by_keys").text(chrome.i18n.getMessage("popup_html_add_by_keys"));
 $("#add_by_auth").text(chrome.i18n.getMessage("popup_html_add_by_auth"));
 $("#add_import_keys").text(chrome.i18n.getMessage("popup_html_import_keys"));
+$("#create_new_account").text(chrome.i18n.getMessage("create_new_account"));
 
 $("#add_account_types_div p").html(
   chrome.i18n.getMessage("popup_html_chose_add_method")
@@ -459,3 +460,20 @@ $("#add_auth_account_div .back_enabled").text(
 $("#add_auth_account_div button").text(
   chrome.i18n.getMessage("popup_html_save")
 );
+
+// create new  account
+// transfers
+$("#create_account_div .back_enabled").text(
+  chrome.i18n.getMessage("create_new_account")
+);
+// $("#create_account_div p").text(
+//   "Create a new account. Only one new account is allowed when installing KeyChain. Save your password and never lose it."
+// );
+$("#create_account_div p").text(
+  chrome.i18n.getMessage("create_new_account_text")
+);
+$("#generate_pk").val("test");
+$("#generate_pk_text").text("Generated Private Key");
+$("#paste_generated_pk").val("input again");
+$("#paste_generated_pk_text").text("Input Generated PK Again");
+$("#create_new_account_btn").text("Create Account");
