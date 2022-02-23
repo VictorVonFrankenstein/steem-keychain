@@ -133,7 +133,6 @@ $("#submit_master_pwd").click(function () {
   }
 });
 function acceptMP(mp) {
-  return true;
   return (
     mp.length >= 16 ||
     (mp.length >= 8 &&
@@ -179,6 +178,7 @@ function initializeMainMenu() {
       } else {
         $("#main").hide();
         $("#register").hide();
+        $("#create_new_account").show();
         $("#add_account_types_div").show();
         $("#add_account_types_div .back_enabled").addClass("back_disabled");
       }
