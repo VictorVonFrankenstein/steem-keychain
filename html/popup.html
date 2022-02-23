@@ -141,6 +141,7 @@
       <button id="add_by_auth"></button>
       <button id="add_import_keys"></button>
       <button id="create_new_account"></button>
+      <!-- <a href="https://upvu.org" target="_blank">gogo</a> -->
     </div>
     <div id="add_account_div" class="settings_child hide-at-start">
       <div class="back_enabled back_menu"></div>
@@ -654,50 +655,32 @@
       <div class="back_menu back_enabled"></div>
       <p></p>
 
-      <div id="generate_pk_text"></div>
+      <div id="input_new_account_text"></div>
       <div class="input_container">
-        <input type="text" id="generate_pk" readonly disabled />
+        <input type="text" id="input_new_account" />
+      </div>
+      <div id="check_new_account_result" class="result_text"></div>
+
+      <button id="check_new_account_btn"></button>
+      <div class="loader" id="check_account_loader" style="display: none">
+        <div><img src="../images/loading.gif" /></div>
       </div>
 
-      <div id="paste_generated_pk_text"></div>
+      <div id="input_pk_text"></div>
       <div class="input_container">
-        <input type="text" id="paste_generated_pk" />
+        <input type="password" id="input_pk" />
       </div>
+
+      <div id="paste_inputed_pk_text"></div>
+      <div class="input_container">
+        <input type="password" id="paste_inputed_pk" />
+      </div>
+      <div id="create_new_account_result" class="result_text"></div>
 
       <button id="create_new_account_btn"></button>
-      <!-- <div class="transfer_balance">
-          <div id="balance"></div>
-          <div id="loading_balance"></div>
-        </div>
-        <div id="send_form">
-          <div class="input_container">
-            <input id="recipient" autocomplete="off" />
-            <img src="../images/arobase.png" class="input_img" />
-          </div>
-          <div id="autocomplete_container"></div>
-          <input
-            type="number"
-            id="amt_send"
-            autocomplete="off"
-            placeholder="0.000"
-          />
-          <div class="custom-select" id="currency_send">
-            <select>
-              <option value="STEEM">STEEM</option>
-              <option value="SBD">SBD</option>
-            </select>
-          </div>
-          <input type="text" id="memo_send" />
-          <div class="checkbox_memo">
-            <label for="encrypt_memo" class="checkbox_container">
-              <div></div>
-              <input type="checkbox" id="encrypt_memo" />
-              <span class="checkmark" />
-            </label>
-          </div>
-          <button id="send_transfer"></button>
-        </div>
-        <div id="show_add_active"></div> -->
+      <div class="loader" id="create_account_loader" style="display: none">
+        <div><img src="../images/loading.gif" /></div>
+      </div>
     </div>
 
     <script src="../vendor/jquery.min.js"></script>

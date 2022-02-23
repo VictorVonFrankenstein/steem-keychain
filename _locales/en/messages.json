@@ -1245,5 +1245,11 @@
   },
   "create_new_account": {
     "message": "Create New Account"
+  },
+  "input_new_account_text": {
+    "message": "Input New Account(3~16 Chars)"
+  },
+  "check_new_account_btn": {
+    "message": "Check Account"
   }
 }

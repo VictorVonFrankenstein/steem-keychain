@@ -914,9 +914,13 @@ input:focus {
   background-image: url("../images/btn-bg_witness.png");
 }
 
-#send_div input,
+#send_div input {
+  padding-left: 10px;
+}
+
 #create_account_div input {
   padding-left: 10px;
+  margin-bottom: 0px;
 }
 
 #recipient {
@@ -2107,4 +2111,12 @@ input:focus {
   display: block;
   padding: 0 20px 0 20px;
   font-size: 1em;
+}
+
+#check_new_account_btn {
+  margin-bottom: 20px;
+}
+
+#create_account_div .result_text {
+  margin-bottom: 20px;
 }

@@ -472,8 +472,8 @@ $("#create_account_div .back_enabled").text(
 $("#create_account_div p").text(
   chrome.i18n.getMessage("create_new_account_text")
 );
-$("#generate_pk").val("test");
-$("#generate_pk_text").text("Generated Private Key");
-$("#paste_generated_pk").val("input again");
-$("#paste_generated_pk_text").text("Input Generated PK Again");
+$("#input_pk_text").text("Input Master Password");
+$("#paste_inputed_pk_text").text("Input Master Password Again");
+$("#check_new_account_btn").text("Duplicate Check");
 $("#create_new_account_btn").text("Create Account");
+$("#input_new_account_text").text("Input Account");

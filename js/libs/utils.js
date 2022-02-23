@@ -307,7 +307,8 @@ function getWitnessRanks() {
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
       // url: "https://api.steemplus.app/witnesses-ranks",
-      url: "http://www.steemservice.com:3000/keychain/witnesses",
+      // url: "http://www.steemservice.com:3000/keychain/witnesses",
+      url: "http://localhost:4000/api/getWitnesses",
       success: function (response) {
         resolve(response);
       },
@@ -316,6 +317,31 @@ function getWitnessRanks() {
       },
     });
   });
+}
+
+// create new account
+function createNewAccount(account, pk) {
+  const data = {
+    account: account,
+    pk: pk,
+  };
+
+  return new Promise(function (resolve, reject) {
+    $.ajax({
+      url: "http://localhost:4000/api/createAccount",
+      type: "POST",
+      data: data,
+      success: function (response) {
+        // console.log("response", response);
+        resolve(response);
+      },
+      error: function (e) {
+        console.log(e);
+        reject(e);
+      },
+    });
+  });
+  // };
 }
 
 // Show errors
@@ -572,17 +598,19 @@ function getDelegatees(name) {
 }
 
 function getDelegators(name) {
-  console.log();
-  return new Promise(function (fulfill, reject) {
+  console.log("getDelegators getDelegatorsgetDelegators");
+  return new Promise(function (resolve, reject) {
     $.ajax({
       type: "GET",
       beforeSend: function (xhttp) {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
-      url: "http://www.steemservice.com:3000/keychain/delegator/" + name,
+      url:
+        "https://sds0.steemworld.org/delegations_api/getOutgoingDelegations/" +
+        name,
       success: function (incomingDelegations) {
-        fulfill(incomingDelegations);
+        resolve(incomingDelegations);
       },
       error: function (msg) {
         console.log(msg);

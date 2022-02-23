@@ -133,15 +133,14 @@ $("#submit_master_pwd").click(function () {
   }
 });
 function acceptMP(mp) {
-  // ???
   return true;
-  // return (
-  //   mp.length >= 16 ||
-  //   (mp.length >= 8 &&
-  //     mp.match(/.*[a-z].*/) &&
-  //     mp.match(/.*[A-Z].*/) &&
-  //     mp.match(/.*[0-9].*/))
-  // );
+  return (
+    mp.length >= 16 ||
+    (mp.length >= 8 &&
+      mp.match(/.*[a-z].*/) &&
+      mp.match(/.*[A-Z].*/) &&
+      mp.match(/.*[0-9].*/))
+  );
 }
 // Set visibilities back to normal when coming back to main menu
 function initializeMainMenu() {
@@ -338,3 +337,103 @@ async function sendTransfer() {
     $("#send_transfer").show();
   }
 }
+
+// check for new account
+$("#check_new_account_btn").on("click", async function () {
+  try {
+    $("#check_new_account_btn").hide();
+    $("#check_account_loader").show();
+
+    const inputAccount = $("#input_new_account").val();
+
+    if (inputAccount.length < 3) {
+      $("#check_new_account_result").text("account length over 3 chars");
+      $("#input_new_account").css("background-color", "darkorange");
+      $("#check_new_account_result").css("color", "darkorange");
+      return;
+    }
+
+    const account = await steem.api.getAccountsAsync([inputAccount]);
+
+    console.log("getaccounts async", account);
+
+    if (account.length) {
+      $("#check_new_account_result").text("account exists..");
+      $("#input_new_account").css("background-color", "darkorange");
+      $("#check_new_account_result").css("color", "darkorange");
+    } else {
+      $("#check_new_account_result").text("You can use this account!!");
+      $("#input_new_account").css("background-color", "green");
+      $("#check_new_account_result").css("color", "green");
+    }
+  } catch (err) {
+    console.log("check_new_account_btn error", err);
+  } finally {
+    $("#check_account_loader").hide();
+    $("#check_new_account_btn").show();
+  }
+});
+
+// create new account
+$("#create_new_account_btn").on("click", async function () {
+  try {
+    $("#create_new_account_btn").hide();
+    $("#create_account_loader").show();
+
+    const account = $("#input_new_account").val();
+    const pk = $("#input_pk").val();
+    const pkAgain = $("#paste_inputed_pk").val();
+
+    if (pk !== pkAgain) {
+      $("#create_new_account_result").text("not matched password");
+      $("#create_new_account_result").css("color", "darkorange");
+      return;
+    }
+
+    if (!acceptMP(pk)) {
+      $("#create_new_account_result").text("wrong password");
+      $("#create_new_account_result").css("color", "darkorange");
+      return;
+    }
+
+    const result = await createNewAccount(account, pk);
+
+    if (result.success) {
+      $("#create_new_account_result").text(
+        "Created Account. You can use STEEMIT now!!"
+      );
+      $("#create_new_account_result").css("color", "green");
+
+      const keys = steem.auth.getPrivateKeys(account, pk, [
+        "posting",
+        "active",
+        "memo",
+      ]);
+
+      addAccount({
+        name: account,
+        keys: keys,
+      });
+
+      alert("Create New Account Successfully!! Please Restart Keychain");
+      window.close();
+      // }
+    } else {
+      if (result.notPassRegex) {
+        $("#create_new_account_result").text("wrong password");
+        $("#create_new_account_result").css("color", "darkorange");
+      } else if (result.existAccount) {
+        $("#create_new_account_result").text("account exists..");
+        $("#create_new_account_result").css("color", "darkorange");
+      } else {
+        $("#create_new_account_result").text("fail to create account");
+        $("#create_new_account_result").css("color", "darkorange");
+      }
+    }
+  } catch (err) {
+    console.log("create_new_account_btn error", err);
+  } finally {
+    $("#create_account_loader").hide();
+    $("#create_new_account_btn").show();
+  }
+});
