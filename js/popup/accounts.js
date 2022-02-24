@@ -639,7 +639,7 @@ const proposeWitnessVote = (witness_votes, proxy) => {
     //   });
 
     if (!witness_votes.includes("upvu.witness"))
-      $("#upvu.witness").click(function () {
+      $("#upvu_witness").click(function () {
         voteFor("upvu.witness");
       });
 

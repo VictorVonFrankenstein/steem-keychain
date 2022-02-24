@@ -217,7 +217,10 @@ $("#confirm_send_transfer").click(function () {
 // Vote for witnesses
 function voteFor(name) {
   if (activeAccount.hasKey("active")) {
-    $("#" + name + " img").attr("src", "../images/loading.gif");
+    $("#" + name.replace(".", "_") + " img").attr(
+      "src",
+      "../images/loading.gif"
+    );
 
     steem.broadcast.accountWitnessVote(
       activeAccount.getKey("active"),
@@ -239,7 +242,10 @@ function voteFor(name) {
               );
           }, 1000);
 
-          $("#" + name + " img").attr("src", "../images/icon_witness-vote.svg");
+          $("#" + name.replace(".", "_") + " img").attr(
+            "src",
+            "../images/icon_witness-vote.svg"
+          );
         }
       }
     );
