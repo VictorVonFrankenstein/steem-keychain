@@ -584,13 +584,14 @@ function addCommas(nStr, currency) {
 }
 
 function getDelegatees(name) {
-  return new Promise(function (fulfill, reject) {
+  return new Promise(function (resolve, reject) {
     steem.api.getVestingDelegations(
       name,
       null,
       1000,
       function (err, outgoingDelegations) {
-        if (!err) fulfill(outgoingDelegations);
+        // console.log("outgoingDelegations", outgoingDelegations);
+        if (!err) resolve(outgoingDelegations);
         else reject(err);
       }
     );
@@ -598,7 +599,6 @@ function getDelegatees(name) {
 }
 
 function getDelegators(name) {
-  console.log("getDelegators getDelegatorsgetDelegators");
   return new Promise(function (resolve, reject) {
     $.ajax({
       type: "GET",
@@ -607,10 +607,21 @@ function getDelegators(name) {
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
       url:
-        "https://sds0.steemworld.org/delegations_api/getOutgoingDelegations/" +
+        "https://sds0.steemworld.org/delegations_api/getIncomingDelegations/" +
         name,
-      success: function (incomingDelegations) {
-        resolve(incomingDelegations);
+      success: function (response) {
+        const rows = response.result.rows;
+        const list = [];
+
+        rows.forEach((row) => {
+          list.push({
+            delegator: row[1],
+            vesting_shares: row[3],
+            delegation_date: new Date(row[0] * 1000),
+          });
+        });
+
+        resolve(list);
       },
       error: function (msg) {
         console.log(msg);

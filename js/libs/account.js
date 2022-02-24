@@ -222,16 +222,13 @@ class Account {
   }
 
   async getDelegators() {
-    console.log("start getDelegators=-=-=-=-");
     const that = this;
-    console.log("start getDelegators=-=-=-=-2");
+
     let delegators = await this.delegators;
-    console.log("start getDelegators=-=-=-=-3");
     delegators = delegators.filter(function (elt) {
-      console.log("start getDelegators=-=-=-=-5");
       return elt.vesting_shares != 0;
     });
-    console.log("start getDelegators=-=-=-=-4");
+
     console.log("delegators", delegators);
     if (delegators.length > 0)
       delegators = await Promise.all(
