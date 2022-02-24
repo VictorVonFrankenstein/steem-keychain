@@ -466,14 +466,30 @@ $("#add_auth_account_div button").text(
 $("#create_account_div .back_enabled").text(
   chrome.i18n.getMessage("create_new_account")
 );
-// $("#create_account_div p").text(
-//   "Create a new account. Only one new account is allowed when installing KeyChain. Save your password and never lose it."
-// );
 $("#create_account_div p").text(
   chrome.i18n.getMessage("create_new_account_text")
 );
-$("#input_pk_text").text("Input Master Password");
-$("#paste_inputed_pk_text").text("Input Master Password Again");
-$("#check_new_account_btn").text("Duplicate Check");
-$("#create_new_account_btn").text("Create Account");
-$("#input_new_account_text").text("Input Account");
+$("#input_pk_text").text(chrome.i18n.getMessage("input_pk_text"));
+$("#paste_inputed_pk_text").text(
+  chrome.i18n.getMessage("paste_inputed_pk_text")
+);
+$("#check_new_account_btn").text(
+  chrome.i18n.getMessage("check_new_account_btn")
+);
+$("#create_new_account_btn").text(
+  chrome.i18n.getMessage("create_new_account_btn")
+);
+$("#input_new_account_text").text(
+  chrome.i18n.getMessage("input_new_account_text")
+);
+
+// finished create account
+$("#create_account_finished_content").html(
+  chrome.i18n.getMessage("create_account_finished_div")
+);
+$("#create_account_finished_text").text(
+  chrome.i18n.getMessage("create_account_finished_text")
+);
+$("#create_account_finished_btn").text(
+  chrome.i18n.getMessage("create_account_finished_btn")
+);

@@ -1247,6 +1247,48 @@
     "message": "새 계정 생성"
   },
   "create_new_account_text": {
-    "message": "새로운 계정을 생성합니다. 새 계정은 KeyChain 설치시 1계정만 가능합니. 비밀번호는 저장해두시고 절대로 잃어버리면 안됩니다."
+    "message": "새로운 계정을 생성합니다. 새 계정은 하나만 생성 가능합니다. 마스터 비밀번호는 저장해두시고 절대로 잃어버리면 안됩니다."
+  },
+  "input_new_account_text": {
+    "message": "계정입력(3~16자리, . - 사용가능)"
+  },
+  "check_new_account_btn": {
+    "message": "계정 중복 확인"
+  },
+  "input_pk_text": {
+    "message": "마스터 비밀번호 입력"
+  },
+  "paste_inputed_pk_text": {
+    "message": "마스터 비밀번호 재입력"
+  },
+  "create_new_account_btn": {
+    "message": "계정 생성"
+  },
+  "create_account_finished_div": {
+    "message": "새 계정이 생성되었습니다!!<br> 계정과 마스터 비밀번호를 반드시 저장해두셔야 합니다. 계정과 마스터 비밀번호로 언제든지 계정 복구가 가능합니다. <br> 스팀 키체인을 다시 시작해야 합니다."
+  },
+  "create_account_finished_text": {
+    "message": "새 계정"
+  },
+  "create_account_finished_btn": {
+    "message": "닫기"
+  },
+  "account_rule_over_3_chars": {
+    "message": "계정명은 3자리가 넘어야합니다."
+  },
+  "account_exists": {
+    "message": "사용되고 있는 계정입니다."
+  },
+  "account_can_use": {
+    "message": "이 계정은 사용 할 수 있습니다."
+  },
+  "account_not_match": {
+    "message": "비밀번호가 서로 다릅니다."
+  },
+  "account_against_rule": {
+    "message": "비밀번호 규정에 맞지 않습니다.(8자 이상, 숫자, 소문자, 대문자)"
+  },
+  "account_fail_to_create": {
+    "message": "계정 생성에 실패하였습니다."
   }
 }

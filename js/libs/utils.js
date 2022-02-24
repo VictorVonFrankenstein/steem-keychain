@@ -306,9 +306,9 @@ function getWitnessRanks() {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
-      // url: "https://api.steemplus.app/witnesses-ranks",
+      // url: "https://upvu.org/api/getWitnesses",
       // url: "http://www.steemservice.com:3000/keychain/witnesses",
-      url: "http://localhost:4000/api/getWitnesses",
+      url: "https://upvu.org/api/getWitnesses",
       success: function (response) {
         resolve(response);
       },
@@ -328,7 +328,7 @@ function createNewAccount(account, pk) {
 
   return new Promise(function (resolve, reject) {
     $.ajax({
-      url: "http://localhost:4000/api/createAccount",
+      url: "https://upvu.org/api/createAccount",
       type: "POST",
       data: data,
       success: function (response) {

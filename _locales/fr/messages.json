@@ -235,6 +235,10 @@
     "message": "Keychainify",
     "description": "on settings page"
   },
+  "popup_html_import_export": {
+    "message": "Importer/Exporter",
+    "description": "on settings page"
+  },
   "popup_html_about": {
     "message": "À propos de Steem Keychain",
     "description": "on settings page"
@@ -278,6 +282,18 @@
   "popup_html_enable_keychainify_info": {
     "message": "Actuellement, seules les URL de transfert Steem Connect sont supportées.",
     "description": "on keychainify settings"
+  },
+  "popup_html_import_export_text": {
+    "message": "Vous pouvez exporter toutes vos clés chiffrées dans un fichier. Cela vous permettra de les importer dans Keychain sur un autre appareil ou simplement de les sauvegarder.<br/><br/>Lors de l'importation, seuls les comptes qui ne sont pas déjà présents sur l'instance seront ajoutés.",
+    "description": "on import / export settings"
+  },
+  "popup_html_import": {
+    "message": "Importer",
+    "description": "on import / export settings"
+  },
+  "popup_html_export": {
+    "message": "Exporter",
+    "description": "on import / export settings"
   },
   "popup_html_about_text": {
     "message": "L'idée et le concept de l'extension Steem Keychain ont été créés par <a href=\"https://steemit.com/@yabapmatt\" target=\"_blank\">@yabapmatt</a> qui est un développeur et témoin sur Steem. Il a été principalement développé par <a href=\"https://steemit.com/@stoodkev\" target=\"_blank\">@stoodkev</a> qui est également un développeur Steem (SteemPlus) et un témoin. La conception et le développement ont été financés par @aggroed (un témoin du top 20 Steem) et @yabapmatt grâce à leur entreprise commune Splinterlands, qui est un jeu de cartes à collectionner construit sur la blockchain Steem. Jetez-y un coup d’œil sur <a href=\"https://splinterlands.io\" target=\"_blank\">splinterlands.io</a>!",
@@ -1169,5 +1185,110 @@
   },
   "popup_html_send_transfer": {
     "message": "Envoyer"
+  },
+  "dialog_title_add_key_auth": {
+    "message": "Ajouter une clé"
+  },
+  "dialog_title_remove_key_auth": {
+    "message": "Supprimer la clé"
+  },
+  "dialog_auth_key": {
+    "message": "clé",
+    "context": "New key to be added"
+  },
+  "bgd_ops_add_key_auth": {
+    "message": "$1 a été ajouté en tant que clé de 2 $ pour le compte @$3 avec un poids de 4 $.",
+    "context": "Succesfully added a new keypair"
+  },
+  "bgd_ops_remove_key_auth": {
+    "message": "$1 a été supprimé en tant que clé $2 pour le compte @$3.",
+    "context": "succesfully removed a keypair"
+  },
+  "popup_html_add_by_keys": {
+    "message": "Utiliser clés/passe",
+    "context": "When adding new account. In a button, must keep short. "
+  },
+  "popup_html_add_by_auth": {
+    "message": "Utiliser un compte autorisé",
+    "context": "When adding new account. In a button, must keep short."
+  },
+  "popup_html_chose_add_method": {
+    "message": "Vous pouvez ajouter vos clés en saisissant une clé privée ou votre mot de passe principal.<be/>Vous pouvez également spécifier un compte autorisé.",
+    "context": "Text when adding new method."
+  },
+  "popup_html_auth_text": {
+    "message": "Ajoutez le nouveau compte en spécifiant un compte qui a autorité dessus, et qui est déjà enregistré dans Steem Keychain.",
+    "context": "On Add new account => via auth"
+  },
+  "popup_html_auth_placeholder_username": {
+    "message": "Nom d'utilisateur"
+  },
+  "popup_html_auth_placeholder_username_auth": {
+    "message": "Compte autorisé",
+    "context": "The placeholder for the authorized account that will use its keys for this account."
+  },
+  "popup_no_auth_account": {
+    "message": "Veuillez économiser @$1 dans Steem Keychain pour l'utiliser comme compte autorisé."
+  },
+  "popup_accounts_no_auth": {
+    "message": "@$1 n'a pas autorité sur @$2.",
+    "context": "When trying to add an account via authority"
+  },
+  "import_html_text": {
+    "message": "Importez vos clés depuis une autre instance Keychain à l'aide d'un fichier .kc.<br/><br/>Vous devez utiliser le même mot de passe principal sur les deux instances pour déchiffrer les clés."
+  },
+  "import_html_success": {
+    "message": "Vous avez importé vos clés avec succès!"
+  },
+  "import_html_error": {
+    "message": "Une erreur s'est produite lors de l'importation de vos clés.<br/>Assurez-vous que vous utilisez la même clé principale que lorsque vous avez exporté le fichier."
+  },
+  "create_new_account": {
+    "message": "créer un nouveau compte"
+  },
+  "create_new_account_text": {
+    "message": "Créer un nouveau compte. Un seul nouveau compte est autorisé lors de l'installation de KeyChain. Enregistrez votre mot de passe principal et ne le perdez jamais."
+  },
+  "input_new_account_text": {
+    "message": "Entrez un nouveau compte (3 ~ 16 caractères)"
+  },
+  "check_new_account_btn": {
+    "message": "Vérification en double"
+  },
+  "input_pk_text": {
+    "message": "Saisir le mot de passe principal"
+  },
+  "paste_inputed_pk_text": {
+    "message": "Entrez à nouveau le mot de passe principal"
+  },
+  "create_new_account_btn": {
+    "message": "Créer un compte"
+  },
+  "create_account_finished_div": {
+    "message": "Nouveau compte créé avec succès !<br/> Vous devez vous souvenir de votre compte et de votre mot de passe principal. Si vous les stockez chaque fois que vous récupérez votre compte. <br/> Vous devez redémarrer Steem Keychain."
+  },
+  "create_account_finished_text": {
+    "message": "Votre nouveau compte"
+  },
+  "create_account_finished_btn": {
+    "message": "Fermer"
+  },
+  "account_rule_over_3_chars": {
+    "message": "La longueur du compte doit dépasser 3 caractères"
+  },
+  "account_exists": {
+    "message": "Ce compte existe. Utilisez un autre nom."
+  },
+  "account_can_use": {
+    "message": "Vous pouvez utiliser ce compte!!"
+  },
+  "account_not_match": {
+    "message": "Ne correspond pas au mot de passe"
+  },
+  "account_against_rule": {
+    "message": "Mot de passe principal contre la règle."
+  },
+  "account_fail_to_create": {
+    "message": "Échec de la création du compte."
   }
 }

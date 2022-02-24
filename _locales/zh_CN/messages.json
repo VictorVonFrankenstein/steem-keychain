@@ -235,6 +235,10 @@
     "message": "Keychainify",
     "description": "on settings page"
   },
+  "popup_html_import_export": {
+    "message": "进口/出口",
+    "description": "on settings page"
+  },
   "popup_html_about": {
     "message": "关於Steem Keychain",
     "description": "on settings page"
@@ -278,6 +282,18 @@
   "popup_html_enable_keychainify_info": {
     "message": "当前仅支持Steem Connect传输URL。",
     "description": "on keychainify settings"
+  },
+  "popup_html_import_export_text": {
+    "message": "您可以导出文件中加密的所有密钥。 这将允许您将它们导入到另一台设备上的 Keychain 或简单地保护它们。<br/><br/>导入时，只会添加实例上尚不存在的帐户。",
+    "description": "on import / export settings"
+  },
+  "popup_html_import": {
+    "message": "进口",
+    "description": "on import / export settings"
+  },
+  "popup_html_export": {
+    "message": "出口",
+    "description": "on import / export settings"
   },
   "popup_html_about_text": {
     "message": "SteemKeychain瀏览器扩充功能的总体想法和概念是由<a href=\"https://steemit.com/@yabapmatt\" target=\"_blank\"> @yabapmatt </a>创建的，他是Steem区块链的开发人员和见证人。它主要由<a href=\"https://steemit.com/@stoodkev\" target=\"_blank\"> @stoodkev </a>开发的，他也是Steem开发人员（SteemPlus）和见证人。设计和开发由@aggroed（Steem的前20名见证人）和@yabapmatt通过他们的联合业务Splinterlands资助，Splinterlands是在Steem区块链之上构建的基於区块链的可收藏交易卡牌游戏。请确保在<a href=\"https://splinterlands.io\" target=\"_blank\"> https://splinterlands.io </a>进行检查！",
@@ -1169,5 +1185,110 @@
   },
   "popup_html_send_transfer": {
     "message": "送出"
+  },
+  "dialog_title_add_key_auth": {
+    "message": "添加密钥"
+  },
+  "dialog_title_remove_key_auth": {
+    "message": "删除密钥"
+  },
+  "dialog_auth_key": {
+    "message": "钥匙",
+    "context": "New key to be added"
+  },
+  "bgd_ops_add_key_auth": {
+    "message": "已将 $1 添加为帐户 @$3 的 $2 密钥，权重为 $4。",
+    "context": "Succesfully added a new keypair"
+  },
+  "bgd_ops_remove_key_auth": {
+    "message": "$1 已作为帐户 @$3 的 $2 密钥被删除。",
+    "context": "succesfully removed a keypair"
+  },
+  "popup_html_add_by_keys": {
+    "message": "使用密钥/密码",
+    "context": "When adding new account. In a button, must keep short. "
+  },
+  "popup_html_add_by_auth": {
+    "message": "使用授权账号",
+    "context": "When adding new account. In a button, must keep short."
+  },
+  "popup_html_chose_add_method": {
+    "message": "您可以通过输入私钥或主密码来添加密钥。<be/>或者，您可以指定授权帐户。",
+    "context": "Text when adding new method."
+  },
+  "popup_html_auth_text": {
+    "message": "通过指定一个对其具有权限且已保存在 Steem Keychain 中的帐户来添加新帐户。",
+    "context": "On Add new account => via auth"
+  },
+  "popup_html_auth_placeholder_username": {
+    "message": "用户名"
+  },
+  "popup_html_auth_placeholder_username_auth": {
+    "message": "授权账户",
+    "context": "The placeholder for the authorized account that will use its keys for this account."
+  },
+  "popup_no_auth_account": {
+    "message": "请在 Steem Keychain 中保存 @$1 以将其用作授权帐户。"
+  },
+  "popup_accounts_no_auth": {
+    "message": "@$1 对@$2 没有权限。",
+    "context": "When trying to add an account via authority"
+  },
+  "import_html_text": {
+    "message": "使用 .kc 文件从另一个 Keychain 实例导入您的密钥。<br/><br/>您需要在两个实例上使用相同的主密码来解密密钥。"
+  },
+  "import_html_success": {
+    "message": "您已成功导入密钥！"
+  },
+  "import_html_error": {
+    "message": "导入您的密钥时出错。<br/>请确保您使用的主密钥与导出文件时相同。"
+  },
+  "create_new_account": {
+    "message": "建立新帐户"
+  },
+  "create_new_account_text": {
+    "message": "创建一个新账户。 安装 KeyChain 时只允许一个新帐户。 保存您的主密码，永不丢失。"
+  },
+  "input_new_account_text": {
+    "message": "输入新账户（3~16个字符）"
+  },
+  "check_new_account_btn": {
+    "message": "重复检查"
+  },
+  "input_pk_text": {
+    "message": "输入主密码"
+  },
+  "paste_inputed_pk_text": {
+    "message": "再次输入主密码"
+  },
+  "create_new_account_btn": {
+    "message": "创建帐号"
+  },
+  "create_account_finished_div": {
+    "message": "新账号创建成功！！<br/>您一定要记住您的账号和主密码。 如果您在恢复帐户时存储它们。 <br/> 需要重启Steem Keychain。"
+  },
+  "create_account_finished_text": {
+    "message": "您的新帐户"
+  },
+  "create_account_finished_btn": {
+    "message": "关闭"
+  },
+  "account_rule_over_3_chars": {
+    "message": "帐户长度必须超过 3 个字符"
+  },
+  "account_exists": {
+    "message": "此帐户存在。 使用另一个名称。"
+  },
+  "account_can_use": {
+    "message": "你可以用这个账号!!"
+  },
+  "account_not_match": {
+    "message": "密码不匹配"
+  },
+  "account_against_rule": {
+    "message": "违反规则的主密码。"
+  },
+  "account_fail_to_create": {
+    "message": "创建帐户失败。"
   }
 }

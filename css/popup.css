@@ -82,7 +82,8 @@ body {
 #confirm_send_div,
 #add_account_types_div,
 #add_auth_account_div,
-#create_account_div {
+#create_account_div,
+#create_account_finished_div {
   scrollbar-width: none;
   width: 350px;
   height: 100%;
@@ -181,7 +182,8 @@ input:focus {
 #powerdown_div input,
 #add_account_types_div input,
 #add_auth_account_div input,
-#create_account_div input {
+#create_account_div input,
+#create_account_finished_div input {
   width: 100%;
   box-sizing: border-box;
   height: 48.43px;
@@ -249,6 +251,7 @@ input:focus {
 #add_account_types_div button,
 #add_auth_account_div button,
 #create_account_div button,
+#create_account_finished_div button,
 #import_settings button {
   border-radius: 5px;
   width: 100%;
@@ -291,6 +294,7 @@ input:focus {
 #add_account_types_div button:hover,
 #add_auth_account_div button:hover,
 #create_account_div button:hover,
+#create_account_finished_div button:hover,
 #import_settings button:hover {
   background-color: #917fc6;
   border: solid 1px #917fc6;
@@ -401,7 +405,8 @@ input:focus {
 #confirm_send_div,
 #add_account_types_div,
 #add_auth_account_div,
-#create_account_div {
+#create_account_div,
+#create_account_finished_div {
   display: none;
 }
 
@@ -914,7 +919,8 @@ input:focus {
   background-image: url("../images/btn-bg_witness.png");
 }
 
-#send_div input {
+#send_div input,
+#create_account_finished_div input {
   padding-left: 10px;
 }
 
@@ -2118,5 +2124,5 @@ input:focus {
 }
 
 #create_account_div .result_text {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }

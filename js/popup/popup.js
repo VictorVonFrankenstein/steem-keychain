@@ -347,9 +347,12 @@ $("#check_new_account_btn").on("click", async function () {
     const inputAccount = $("#input_new_account").val();
 
     if (inputAccount.length < 3) {
-      $("#check_new_account_result").text("account length over 3 chars");
+      $("#check_new_account_result").text(
+        chrome.i18n.getMessage("account_rule_over_3_chars")
+      );
       $("#input_new_account").css("background-color", "darkorange");
-      $("#check_new_account_result").css("color", "darkorange");
+      $("#check_new_account_result").css("color", "darkred");
+      $("#input_new_account").focus();
       return;
     }
 
@@ -358,11 +361,17 @@ $("#check_new_account_btn").on("click", async function () {
     console.log("getaccounts async", account);
 
     if (account.length) {
-      $("#check_new_account_result").text("account exists..");
+      $("#check_new_account_result").text(
+        chrome.i18n.getMessage("account_exists")
+      );
       $("#input_new_account").css("background-color", "darkorange");
-      $("#check_new_account_result").css("color", "darkorange");
+      $("#check_new_account_result").css("color", "darkred");
+      $("#input_new_account").focus();
+      return;
     } else {
-      $("#check_new_account_result").text("You can use this account!!");
+      $("#check_new_account_result").text(
+        chrome.i18n.getMessage("account_can_use")
+      );
       $("#input_new_account").css("background-color", "green");
       $("#check_new_account_result").css("color", "green");
     }
@@ -385,24 +394,28 @@ $("#create_new_account_btn").on("click", async function () {
     const pkAgain = $("#paste_inputed_pk").val();
 
     if (pk !== pkAgain) {
-      $("#create_new_account_result").text("not matched password");
-      $("#create_new_account_result").css("color", "darkorange");
+      $("#create_new_account_result").text(
+        chrome.i18n.getMessage("account_not_match")
+      );
+      $("#create_new_account_result").css("color", "darkred");
       return;
     }
 
     if (!acceptMP(pk)) {
-      $("#create_new_account_result").text("wrong password");
-      $("#create_new_account_result").css("color", "darkorange");
+      $("#create_new_account_result").text(
+        chrome.i18n.getMessage("account_against_rule")
+      );
+      $("#create_new_account_result").css("color", "darkred");
       return;
     }
 
     const result = await createNewAccount(account, pk);
 
     if (result.success) {
-      $("#create_new_account_result").text(
-        "Created Account. You can use STEEMIT now!!"
-      );
-      $("#create_new_account_result").css("color", "green");
+      // $("#create_new_account_result").text(
+      //   "Created Account. You can use STEEMIT now!!"
+      // );
+      // $("#create_new_account_result").css("color", "green");
 
       const keys = steem.auth.getPrivateKeys(account, pk, [
         "posting",
@@ -415,25 +428,39 @@ $("#create_new_account_btn").on("click", async function () {
         keys: keys,
       });
 
-      alert("Create New Account Successfully!! Please Restart Keychain");
-      window.close();
-      // }
+      $("#created_account_name").val(account);
+      $("#create_account_finished_div").show();
+      $("#create_account_div").hide();
     } else {
       if (result.notPassRegex) {
-        $("#create_new_account_result").text("wrong password");
-        $("#create_new_account_result").css("color", "darkorange");
+        $("#create_new_account_result").text(
+          chrome.i18n.getMessage("account_against_rule")
+        );
+        $("#create_new_account_result").css("color", "darkred");
       } else if (result.existAccount) {
-        $("#create_new_account_result").text("account exists..");
-        $("#create_new_account_result").css("color", "darkorange");
+        $("#create_new_account_result").text(
+          chrome.i18n.getMessage("account_exists")
+        );
+        $("#create_new_account_result").css("color", "darkred");
       } else {
-        $("#create_new_account_result").text("fail to create account");
-        $("#create_new_account_result").css("color", "darkorange");
+        $("#create_new_account_result").text(
+          chrome.i18n.getMessage("account_fail_to_create")
+        );
+        $("#create_new_account_result").css("color", "darkred");
       }
     }
   } catch (err) {
     console.log("create_new_account_btn error", err);
+    $("#create_new_account_result").text(
+      chrome.i18n.getMessage("account_fail_to_create")
+    );
+    $("#create_new_account_result").css("color", "darkred");
   } finally {
     $("#create_account_loader").hide();
     $("#create_new_account_btn").show();
   }
+});
+
+$("#create_account_finished_btn").on("click", function () {
+  window.close();
 });
