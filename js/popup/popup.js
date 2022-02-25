@@ -435,8 +435,9 @@ $("#create_new_account_btn").on("click", async function () {
       });
 
       $("#created_account_name").val(account);
-      $("#create_account_finished_div").show();
+      $("#main").hide();
       $("#create_account_div").hide();
+      $("#create_account_finished_div").show();
     } else {
       if (result.notPassRegex) {
         $("#create_new_account_result").text(
