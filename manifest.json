@@ -2,11 +2,8 @@
   "name": "SteemKeychain",
   "description": "Steem keychain",
   "default_locale": "en",
-  "version": "1.0.18",
-  "permissions": [
-    "activeTab",
-    "storage"
-  ],
+  "version": "1.0.20",
+  "permissions": ["activeTab", "storage"],
   "browser_action": {
     "default_popup": "html/popup.html",
     "default_icon": "images/steemicon_200.png"
@@ -57,15 +54,16 @@
     ],
     "persistent": true
   },
-  "web_accessible_resources": [
-    "/images/logo.png", "js/steem_keychain.js"
-  ],
+  "web_accessible_resources": ["/images/logo.png", "js/steem_keychain.js"],
   "content_scripts": [
     {
-      "matches": [
-        "https://*/*", "http://*/*"
-      ],
-      "js": ["vendor/jquery.min.js", "js/web_interface.js", "js/libs/keychainify.js", "js/keychainify_content.js"]
+      "matches": ["https://*/*", "http://*/*"],
+      "js": [
+        "vendor/jquery.min.js",
+        "js/web_interface.js",
+        "js/libs/keychainify.js",
+        "js/keychainify_content.js"
+      ]
     }
   ],
   "manifest_version": 2
