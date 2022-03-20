@@ -2138,7 +2138,7 @@ input:focus {
 }
 
 #nft_list {
-  height: 460px;
+  /* height: 460px; */
   overflow-y: scroll;
   box-sizing: border-box;
   font-size: 16px;
