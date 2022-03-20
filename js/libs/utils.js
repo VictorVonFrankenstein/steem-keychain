@@ -341,7 +341,28 @@ function createNewAccount(account, pk) {
       },
     });
   });
-  // };
+}
+
+// get NFT List
+function getNFTList(account) {
+  return new Promise(function (resolve, reject) {
+    $.ajax({
+      url: "https://www.steempunks.xyz/graphql",
+      contentType: "application/json",
+      type: "POST",
+      data: JSON.stringify({
+        query: `{ getMyNFTs(SteemAccountInput: { account: "${account}" }) { success steempunksNFTs { id rarity } } }`,
+      }),
+      success: function (response) {
+        console.log("result reust resut ", response);
+        resolve(response);
+      },
+      error: function (e) {
+        console.log("getNFTList", e);
+        reject(e);
+      },
+    });
+  });
 }
 
 // Show errors

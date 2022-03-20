@@ -151,6 +151,10 @@
     "message": "Historial de comentarios",
     "description": "Upon clicking on Comments"
   },
+  "popup_html_nfts": {
+    "message": "NFT",
+    "description": "Show or Transfer NFTs"
+  },
   "popup_html_setup_text": {
     "message": "Introduce el nombre de tu cuenta Steem y la contraseña maestra o la clave privada o activa de esa cuenta a continuación. Tu contraseña maestra NO se guardará y sólo se utilizará para generar tus claves privadas.<br/><br/>Puedes añadir / eliminar cuentas o claves de Steem en cualquier momento. Si necesitas crear una nueva cuenta Steem, puedes hacerlo en <a href=\"https://signup.steemit.com/\" target=\"_blank\" style=\"text-decoration: underline; color: white;\">https://signup.steemit.com/</a>.",
     "description": "When adding new account"

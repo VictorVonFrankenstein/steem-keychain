@@ -63,6 +63,7 @@ const loadAccount = async (name) => {
   proposeWitnessVote(witness_votes, proxy);
   getAccountHistory();
   getAccountComments();
+  setNFTs();
 };
 
 // Display all the account data

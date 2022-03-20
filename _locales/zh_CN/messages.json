@@ -151,6 +151,10 @@
     "message": "评论历史",
     "description": "Upon clicking on Comments"
   },
+  "popup_html_nfts": {
+    "message": "NFT",
+    "description": "Show or Transfer NFTs"
+  },
   "popup_html_setup_text": {
     "message": "在下面输入您的Steem帐户名称以及该帐户的主密码或私人贴文或活跃私钥。 您的主密码将不会保存，只会使用於生成私钥。<br/> <br/>您可以随时新增/删除Steem帐户或私钥。 如果您需要建立一个新的Steem帐户，可以在<a href =“ https://signup.steemit.com/” target =“ _ blank” style =“ text-decoration：underline; color：white;”中进行。 > https://signup.steemit.com/ </a>。",
     "description": "When adding new account"

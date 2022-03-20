@@ -60,6 +60,7 @@ body {
 #send_div,
 #acc_transfers,
 #acc_comments,
+#nft_page,
 #settings_div,
 .settings_child,
 #pref_div,
@@ -381,6 +382,7 @@ input:focus {
 #send_div,
 #acc_transfers,
 #acc_comments,
+#nft_page,
 .account_info,
 .account_info_content,
 .memo,
@@ -919,6 +921,10 @@ input:focus {
   background-image: url("../images/btn-bg_witness.png");
 }
 
+#NFTs {
+  background-image: url("../images/btn-bg_tokens.png");
+}
+
 #send_div input,
 #create_account_finished_div input {
   padding-left: 10px;
@@ -976,6 +982,10 @@ input:focus {
 }
 
 #acc_comments .back_menu {
+  margin-bottom: 30px;
+}
+
+#nft_page .back_menu {
   margin-bottom: 30px;
 }
 
@@ -2125,4 +2135,28 @@ input:focus {
 
 #create_account_div .result_text {
   margin-bottom: 10px;
+}
+
+#nft_list {
+  height: 460px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nft_img {
+  width: 100%;
+}
+
+.nft_div {
+  width: 42%;
+  border: 4px solid white;
+  border-radius: 8px;
+  margin: 6px;
+  line-height: 0px;
 }

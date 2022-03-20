@@ -54,6 +54,7 @@ $("#history").text(chrome.i18n.getMessage("popup_html_history"));
 $("#tokens").text(chrome.i18n.getMessage("popup_html_tokens"));
 $("#witness").text(chrome.i18n.getMessage("popup_html_witness"));
 $("#comments").text(chrome.i18n.getMessage("popup_html_comment_history"));
+$("#NFTs").text(chrome.i18n.getMessage("popup_html_nfts"));
 
 $("#acc_transfers .back_menu").text(
   chrome.i18n.getMessage("popup_html_wallet_history")
@@ -61,6 +62,11 @@ $("#acc_transfers .back_menu").text(
 
 $("#acc_comments .back_menu").text(
   chrome.i18n.getMessage("popup_html_comment_history")
+);
+
+$("#nft_page .back_menu").text(chrome.i18n.getMessage("popup_html_nfts"));
+$("#nft_detail_page .back_menu").text(
+  chrome.i18n.getMessage("popup_html_nfts")
 );
 
 // Set up

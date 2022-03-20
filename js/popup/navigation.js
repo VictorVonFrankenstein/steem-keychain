@@ -234,6 +234,12 @@ $("#comments").click(function () {
   $("#main").hide();
 });
 
+// Show NFTs
+$("#NFTs").click(function () {
+  $("#nft_page").show();
+  $("#main").hide();
+});
+
 $("#tokens").click(function () {
   $("#tokens_div").show();
   $("#main").hide();
