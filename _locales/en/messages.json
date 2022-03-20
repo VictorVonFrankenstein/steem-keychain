@@ -151,6 +151,10 @@
     "message": "Comments History",
     "description": "Upon clicking on Comments"
   },
+  "popup_html_nfts": {
+    "message": "NFT",
+    "description": "Show or Transfer NFTs"
+  },
   "popup_html_setup_text": {
     "message": "Enter your Steem account name and either the master password or the private posting or active key for that account below. Your master password will NOT be saved and will only be used to generate your private keys.<br/><br/> You may add / remove Steem accounts or keys at any time. If you need to create a new Steem account, you can do so at <a href=\"https://signup.steemit.com/\" target=\"_blank\" style=\"text-decoration: underline; color: white;\">https://signup.steemit.com/</a>.",
     "description": "When adding new account"
@@ -236,7 +240,7 @@
     "description": "on settings page"
   },
   "popup_html_import_export": {
-    "message": "Import / Export",
+    "message": "Import/Export",
     "description": "on settings page"
   },
   "popup_html_about": {
@@ -1242,6 +1246,53 @@
   },
   "import_html_error": {
     "message": "There was an error importing your keys.<br/>Make sure you that you are using the same master key than when you exported the file."
+  },
+  "create_new_account": {
+    "message": "Create New Account"
+  },
+  "create_new_account_text": {
+    "message": "Create a new account. Only one new account is allowed when installing KeyChain. Save your master password and never lose it."
+  },
+  "input_new_account_text": {
+    "message": "Input New Account(3~16 Chars)"
+  },
+  "check_new_account_btn": {
+    "message": "Duplicate Check"
+  },
+  "input_pk_text": {
+    "message": "Input Master Password"
+  },
+  "paste_inputed_pk_text": {
+    "message": "Input Master Password Again"
+  },
+  "create_new_account_btn": {
+    "message": "Create Account"
+  },
+  "create_account_finished_div": {
+    "message": "Created new account successfully!!<br/> You must remember your account and master  password. If you store them whenever you recover your account. <br/> You need to restart Steem Keychain."
+  },
+  "create_account_finished_text": {
+    "message": "Your New Account"
+  },
+  "create_account_finished_btn": {
+    "message": "Close"
+  },
+  "account_rule_over_3_chars": {
+    "message": "Account length must over 3 chars"
+  },
+  "account_exists": {
+    "message": "This account exists. Use another name."
+  },
+  "account_can_use": {
+    "message": "You can use this account!!"
+  },
+  "account_not_match": {
+    "message": "Not match password each other"
+  },
+  "account_against_rule": {
+    "message": "Master password against the rule."
+  },
+  "account_fail_to_create": {
+    "message": "Fail to create account."
   }
-
 }

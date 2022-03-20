@@ -2,15 +2,15 @@ const STEEMIT_100_PERCENT = 10000;
 const STEEM_VOTING_MANA_REGENERATION_SECONDS = 432000;
 
 // get VM only
-var getVotingMana = function(account) {
-  return new Promise(function(fulfill, reject) {
+var getVotingMana = function (account) {
+  return new Promise(function (fulfill, reject) {
     const mana = getVotingManaData(account);
     fulfill(mana.estimated_pct.toFixed(2));
   });
 };
 
 // get all information regarding VM
-var getVotingManaData = function(account) {
+var getVotingManaData = function (account) {
   const estimated_max = getEffectiveVestingSharesPerAccount(account) * 1000000;
   const current_mana = parseFloat(account.voting_manabar.current_mana);
   const last_update_time = account.voting_manabar.last_update_time;
@@ -25,12 +25,12 @@ var getVotingManaData = function(account) {
     last_update_time: last_update_time,
     estimated_mana: estimated_mana,
     estimated_max: estimated_max,
-    estimated_pct: estimated_pct
+    estimated_pct: estimated_pct,
   };
 };
 
 // get SP + received delegations - delegations sent
-var getEffectiveVestingSharesPerAccount = function(account) {
+var getEffectiveVestingSharesPerAccount = function (account) {
   var effective_vesting_shares =
     parseFloat(account.vesting_shares.replace(" VESTS", "")) +
     parseFloat(account.received_vesting_shares.replace(" VESTS", "")) -
@@ -39,7 +39,7 @@ var getEffectiveVestingSharesPerAccount = function(account) {
 };
 
 // get SP of the account
-var getSteemPowerPerAccount = function(
+var getSteemPowerPerAccount = function (
   account,
   totalVestingFund,
   totalVestingShares
@@ -102,7 +102,7 @@ function calculateVoteValue(
 
 // get the voting dollars of a vote for a certain account, if full is set
 // to true, the VM will be set to 100%, otherwise it will use the current VM
-var getVotingDollarsPerAccount = async function(
+var getVotingDollarsPerAccount = async function (
   voteWeight,
   account,
   rewardBalance,
@@ -112,7 +112,7 @@ var getVotingDollarsPerAccount = async function(
   full
 ) {
   const vm = (await getVotingMana(account)) * 100;
-  return new Promise(async function(fulfill, reject) {
+  return new Promise(async function (fulfill, reject) {
     if (rewardBalance && recentClaims && steemPrice && votePowerReserveRate) {
       var effective_vesting_shares = Math.round(
         getEffectiveVestingSharesPerAccount(account) * 1000000
@@ -147,21 +147,21 @@ var getVotingDollarsPerAccount = async function(
 };
 
 // get Resource Credits
-var getRC = function(name) {
+var getRC = function (name) {
   let data = {
     jsonrpc: "2.0",
     id: 1,
     method: "rc_api.find_rc_accounts",
     params: {
-      accounts: [name]
-    }
+      accounts: [name],
+    },
   };
-  return new Promise(function(fulfill, reject) {
+  return new Promise(function (fulfill, reject) {
     $.ajax({
       url: "https://api.steemit.com",
       type: "POST",
       data: JSON.stringify(data),
-      success: function(response) {
+      success: function (response) {
         const STEEM_RC_MANA_REGENERATION_SECONDS = 432000;
         const estimated_max = parseFloat(
           response.result.rc_accounts["0"].max_rc
@@ -188,13 +188,13 @@ var getRC = function(name) {
           estimated_mana: estimated_mana,
           estimated_max: estimated_max,
           estimated_pct: estimated_pct.toFixed(2),
-          fullin: getTimeBeforeFull(estimated_pct * 100)
+          fullin: getTimeBeforeFull(estimated_pct * 100),
         };
         fulfill(res);
       },
-      error: function(e) {
+      error: function (e) {
         console.log(e);
-      }
+      },
     });
   });
 };
@@ -239,81 +239,128 @@ function getTimeBeforeFull(votingPower) {
 
 // Get STEEM price from Bittrex
 function getPriceSteemAsync() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     $.ajax({
       type: "GET",
-      beforeSend: function(xhttp) {
+      beforeSend: function (xhttp) {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
       url: "https://bittrex.com/api/v1.1/public/getticker?market=BTC-STEEM",
-      success: function(response) {
+      success: function (response) {
         resolve(response.result["Bid"]);
       },
-      error: function(msg) {
+      error: function (msg) {
         resolve(null);
-      }
+      },
     });
   });
 }
 
 // Get BTC price from Bittrex
 function getBTCPriceAsync() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     $.ajax({
       type: "GET",
-      beforeSend: function(xhttp) {
+      beforeSend: function (xhttp) {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
       url: "https://bittrex.com/api/v1.1/public/getticker?market=USDT-BTC",
-      success: function(response) {
+      success: function (response) {
         resolve(response.result["Bid"]);
       },
-      error: function(msg) {
+      error: function (msg) {
         resolve(null);
-      }
+      },
     });
   });
 }
 
 // Get SBD price from Bittrex
 function getPriceSBDAsync() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     $.ajax({
       type: "GET",
-      beforeSend: function(xhttp) {
+      beforeSend: function (xhttp) {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
       url: "https://bittrex.com/api/v1.1/public/getticker?market=BTC-SBD",
-      success: function(response) {
+      success: function (response) {
         resolve(response.result["Bid"]);
       },
-      error: function(msg) {
+      error: function (msg) {
         resolve(null);
-      }
+      },
     });
   });
 }
 
 // get Witness Ranks from SteemPlus API
 function getWitnessRanks() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     $.ajax({
       type: "GET",
-      beforeSend: function(xhttp) {
+      beforeSend: function (xhttp) {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
-      // url: "https://api.steemplus.app/witnesses-ranks",
-      url:'http://www.steemservice.com:3000/keychain/witnesses',
-      success: function(response) {
+      // url: "https://upvu.org/api/getWitnesses",
+      // url: "http://www.steemservice.com:3000/keychain/witnesses",
+      url: "https://upvu.org/api/getWitnesses",
+      success: function (response) {
         resolve(response);
       },
-      error: function(msg) {
+      error: function (msg) {
         resolve(msg);
-      }
+      },
+    });
+  });
+}
+
+// create new account
+function createNewAccount(account, pk) {
+  const data = {
+    account: account,
+    pk: pk,
+  };
+
+  return new Promise(function (resolve, reject) {
+    $.ajax({
+      url: "https://upvu.org/api/createAccount",
+      type: "POST",
+      data: data,
+      success: function (response) {
+        // console.log("response", response);
+        resolve(response);
+      },
+      error: function (e) {
+        console.log(e);
+        reject(e);
+      },
+    });
+  });
+}
+
+// get NFT List
+function getNFTList(account) {
+  return new Promise(function (resolve, reject) {
+    $.ajax({
+      url: "https://www.steempunks.xyz/graphql",
+      contentType: "application/json",
+      type: "POST",
+      data: JSON.stringify({
+        query: `{ getMyNFTs(SteemAccountInput: { account: "${account}" }) { success steempunksNFTs { id rarity } } }`,
+      }),
+      success: function (response) {
+        console.log("result reust resut ", response);
+        resolve(response);
+      },
+      error: function (e) {
+        console.log("getNFTList", e);
+        reject(e);
+      },
     });
   });
 }
@@ -322,7 +369,7 @@ function getWitnessRanks() {
 function showError(message) {
   $(".error_div").html(message);
   $(".error_div").show();
-  setTimeout(function() {
+  setTimeout(function () {
     $(".error_div").hide();
   }, 5000);
 }
@@ -330,7 +377,7 @@ function showError(message) {
 function showConfirm(message) {
   $(".success_div").html(message);
   $(".success_div").show();
-  setTimeout(function() {
+  setTimeout(function () {
     $(".success_div").hide();
   }, 5000);
 }
@@ -359,7 +406,7 @@ function initiateCustomSelect() {
       create a new DIV that will act as an option item:*/
       c = document.createElement("DIV");
       c.innerHTML = selElmnt.options[j].innerHTML;
-      c.addEventListener("click", function(e) {
+      c.addEventListener("click", function (e) {
         /*when an item is clicked, update the original select box,
         and the selected item:*/
         var y, i, k, s, h;
@@ -383,7 +430,7 @@ function initiateCustomSelect() {
     }
     x[i].appendChild(b);
     if (i == 0) loadAccount(a.innerHTML);
-    a.addEventListener("click", async function(e) {
+    a.addEventListener("click", async function (e) {
       /*when the select box is clicked, close any other select boxes,
       and open/close the current select box:*/
       e.stopPropagation();
@@ -405,7 +452,7 @@ function initiateCustomSelect() {
         this.innerHTML !== chrome.i18n.getMessage("popup_html_chose_proxy")
       ) {
         chrome.storage.local.set({
-          last_account: this.innerHTML
+          last_account: this.innerHTML,
         });
         loadAccount(this.innerHTML);
       } else if (this.innerHTML == "SBD") {
@@ -426,16 +473,12 @@ function initiateCustomSelect() {
         manageKeys(this.innerHTML);
       } else if (
         getPref &&
-        $(this)
-          .parent()
-          .attr("id") != "custom_select_rpc"
+        $(this).parent().attr("id") != "custom_select_rpc"
       ) {
         setPreferences(this.innerHTML);
       } else if (
         getPref &&
-        $(this)
-          .parent()
-          .attr("id") == "custom_select_rpc"
+        $(this).parent().attr("id") == "custom_select_rpc"
       ) {
         if (this.innerHTML !== chrome.i18n.getMessage("popup_rpc_add"))
           switchRPC(this.innerHTML);
@@ -501,7 +544,7 @@ function isMemoWif(pwd, memo) {
   return steem.auth.wifToPublic(pwd) == memo;
 }
 
-let numberWithCommas = x => {
+let numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
@@ -509,32 +552,32 @@ function nFormatter(num, digits) {
   var si = [
     {
       value: 1,
-      symbol: ""
+      symbol: "",
     },
     {
       value: 1e3,
-      symbol: "k"
+      symbol: "k",
     },
     {
       value: 1e6,
-      symbol: "M"
+      symbol: "M",
     },
     {
       value: 1e9,
-      symbol: "G"
+      symbol: "G",
     },
     {
       value: 1e12,
-      symbol: "T"
+      symbol: "T",
     },
     {
       value: 1e15,
-      symbol: "P"
+      symbol: "P",
     },
     {
       value: 1e18,
-      symbol: "E"
-    }
+      symbol: "E",
+    },
   ];
   var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
   var i;
@@ -562,34 +605,49 @@ function addCommas(nStr, currency) {
 }
 
 function getDelegatees(name) {
-  return new Promise(function(fulfill, reject) {
-    steem.api.getVestingDelegations(name, null, 1000, function(
-      err,
-      outgoingDelegations
-    ) {
-      if (!err) fulfill(outgoingDelegations);
-      else reject(err);
-    });
+  return new Promise(function (resolve, reject) {
+    steem.api.getVestingDelegations(
+      name,
+      null,
+      1000,
+      function (err, outgoingDelegations) {
+        // console.log("outgoingDelegations", outgoingDelegations);
+        if (!err) resolve(outgoingDelegations);
+        else reject(err);
+      }
+    );
   });
 }
 
 function getDelegators(name) {
-  console.log();
-  return new Promise(function(fulfill, reject) {
+  return new Promise(function (resolve, reject) {
     $.ajax({
       type: "GET",
-      beforeSend: function(xhttp) {
+      beforeSend: function (xhttp) {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
-      url:'http://www.steemservice.com:3000/keychain/delegator/' + name,
-      success: function(incomingDelegations) {
-        fulfill(incomingDelegations);
+      url:
+        "https://sds0.steemworld.org/delegations_api/getIncomingDelegations/" +
+        name,
+      success: function (response) {
+        const rows = response.result.rows;
+        const list = [];
+
+        rows.forEach((row) => {
+          list.push({
+            delegator: row[1],
+            vesting_shares: row[3],
+            delegation_date: new Date(row[0] * 1000),
+          });
+        });
+
+        resolve(list);
       },
-      error: function(msg) {
+      error: function (msg) {
         console.log(msg);
         reject(msg);
-      }
+      },
     });
   });
 }

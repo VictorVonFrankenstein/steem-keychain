@@ -56,13 +56,14 @@ const loadAccount = async (name) => {
 
   showUserData();
   claimRewards();
-  // prepareWitnessDiv(witness_votes, proxy);
+  prepareWitnessDiv(witness_votes, proxy);
   prepareDelegationTab();
   preparePowerUpDown();
   showTokenBalances();
   proposeWitnessVote(witness_votes, proxy);
   getAccountHistory();
   getAccountComments();
+  setNFTs();
 };
 
 // Display all the account data
@@ -610,43 +611,42 @@ const claimRewards = async () => {
 const proposeWitnessVote = (witness_votes, proxy) => {
   if (
     !proxy &&
-    !witness_votes.includes("steem-agora")
-    // !witness_votes.includes("stoodkev") ||
-    // !witness_votes.includes("yabapmatt") ||
-    // !witness_votes.includes("aggroed")
+    !witness_votes.includes("upvu.witness")
+    // !witness_votes.includes("happyberrysboy") ||
+    // !witness_votes.includes("realmankwon")
   ) {
-    $("#steem-agora img").attr(
+    $("#upvu.witness img").attr(
       "src",
       "../images/icon_witness-vote" +
-        (witness_votes.includes("steem-agora") ? "" : "_default") +
+        (witness_votes.includes("upvu.witness") ? "" : "_default") +
         ".svg"
     );
-    // $("#yabapmatt img").attr(
+    // $("#happyberrysboy img").attr(
     //   "src",
     //   "../images/icon_witness-vote" +
-    //     (witness_votes.includes("yabapmatt") ? "" : "_default") +
+    //     (witness_votes.includes("happyberrysboy") ? "" : "_default") +
     //     ".svg"
     // );
-    // $("#aggroed img").attr(
+    // $("#realmankwon img").attr(
     //   "src",
     //   "../images/icon_witness-vote" +
-    //     (witness_votes.includes("aggroed") ? "" : "_default") +
+    //     (witness_votes.includes("realmankwon") ? "" : "_default") +
     //     ".svg"
     // );
 
-    // if (!witness_votes.includes("yabapmatt"))
-    //   $("#yabapmatt").click(function () {
-    //     voteFor("yabapmatt");
+    // if (!witness_votes.includes("happyberrysboy"))
+    //   $("#happyberrysboy").click(function () {
+    //     voteFor("happyberrysboy");
     //   });
 
-    if (!witness_votes.includes("steem-agora"))
-      $("#steem-agora").click(function () {
-        voteFor("steem-agora");
+    if (!witness_votes.includes("upvu.witness"))
+      $("#upvu_witness").click(function () {
+        voteFor("upvu.witness");
       });
 
-    // if (!witness_votes.includes("aggroed"))
-    //   $("#aggroed").click(function () {
-    //     voteFor("aggroed");
+    // if (!witness_votes.includes("realmankwon"))
+    //   $("#realmankwon").click(function () {
+    //     voteFor("realmankwon");
     //   });
 
     setTimeout(function () {

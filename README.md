@@ -14,7 +14,7 @@ You can download and install the latest published version of the extension for t
 
 - Google Chrome (or Brave): [
   https://chrome.google.com/webstore/detail/steemkeychain/jhgnbkkipaallpehbohjmkbjofjdmeid?hl=en](https://chrome.google.com/webstore/detail/steemkeychain/jhgnbkkipaallpehbohjmkbjofjdmeid?hl=en)
-- Firefox: [https://addons.mozilla.org/en-US/firefox/addon/steem-keychain/(made by @Yabapmatt)](https://addons.mozilla.org/en-US/firefox/addon/steem-keychain/)
+- Firefox: [https://addons.mozilla.org/ko/firefox/addon/steemkeychain/](https://addons.mozilla.org/ko/firefox/addon/steemkeychain/)
 
 ## Features
 

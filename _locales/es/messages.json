@@ -151,6 +151,10 @@
     "message": "Historial de comentarios",
     "description": "Upon clicking on Comments"
   },
+  "popup_html_nfts": {
+    "message": "NFT",
+    "description": "Show or Transfer NFTs"
+  },
   "popup_html_setup_text": {
     "message": "Introduce el nombre de tu cuenta Steem y la contraseña maestra o la clave privada o activa de esa cuenta a continuación. Tu contraseña maestra NO se guardará y sólo se utilizará para generar tus claves privadas.<br/><br/>Puedes añadir / eliminar cuentas o claves de Steem en cualquier momento. Si necesitas crear una nueva cuenta Steem, puedes hacerlo en <a href=\"https://signup.steemit.com/\" target=\"_blank\" style=\"text-decoration: underline; color: white;\">https://signup.steemit.com/</a>.",
     "description": "When adding new account"
@@ -235,6 +239,10 @@
     "message": "Keychainify",
     "description": "on settings page"
   },
+  "popup_html_import_export": {
+    "message": "Importación/Exportación",
+    "description": "on settings page"
+  },
   "popup_html_about": {
     "message": "Acerca de Steem Keychain",
     "description": "on settings page"
@@ -278,6 +286,18 @@
   "popup_html_enable_keychainify_info": {
     "message": "Actualmente sólo soporta las transferencias con URLs de Steem Connect.",
     "description": "on keychainify settings"
+  },
+  "popup_html_import_export_text": {
+    "message": "Puede exportar todas sus claves cifradas en un archivo. Esto le permitirá importarlos a un llavero en otro dispositivo o simplemente protegerlos.<br/><br/>Al importar, solo se agregarán las cuentas que aún no están presentes en la instancia.",
+    "description": "on import / export settings"
+  },
+  "popup_html_import": {
+    "message": "Importación",
+    "description": "on import / export settings"
+  },
+  "popup_html_export": {
+    "message": "Exportación",
+    "description": "on import / export settings"
   },
   "popup_html_about_text": {
     "message": "La idea y el concepto general de la extensión del navegador Steem Keychain fue creada por <a href=\"https://steemit.com/@yabapmatt\" target=\"_blank\">@yabapmatt</a> que es un desarrollador y Witness en la cadena de bloques de Steem. Fue desarrollado principalmente por<a href=\"https://steemit.com/@stoodkev\" target=\"_blank\">@stoodkev</a> que también es un desarrollador de Steem (SteemPlus) y Witness. El diseño y desarrollo fueron financiados por @aggroed (uno de los 20 principales Witness de Steem) y @yabapmatt a través de su negocio conjunto Splinterlands, que es un juego de cartas coleccionables basado en la blockchain, construido sobre la blockchain de Steem. Asegúrate de comprobarlo en <a href=\"https://splinterlands.io\" target=\"_blank\">splinterlands.io</a>!",
@@ -1169,5 +1189,110 @@
   },
   "popup_html_send_transfer": {
     "message": "Enviar"
+  },
+  "dialog_title_add_key_auth": {
+    "message": "Agregar clave"
+  },
+  "dialog_title_remove_key_auth": {
+    "message": "Eliminar clave"
+  },
+  "dialog_auth_key": {
+    "message": "llave",
+    "context": "New key to be added"
+  },
+  "bgd_ops_add_key_auth": {
+    "message": "Se ha agregado $1 como clave de $2 para la cuenta @$3 con un peso de $4.",
+    "context": "Succesfully added a new keypair"
+  },
+  "bgd_ops_remove_key_auth": {
+    "message": "Se eliminó $1 como clave de $2 para la cuenta @$3.",
+    "context": "succesfully removed a keypair"
+  },
+  "popup_html_add_by_keys": {
+    "message": "Usar claves/contraseña",
+    "context": "When adding new account. In a button, must keep short. "
+  },
+  "popup_html_add_by_auth": {
+    "message": "Usar cuenta autorizada",
+    "context": "When adding new account. In a button, must keep short."
+  },
+  "popup_html_chose_add_method": {
+    "message": "Puede agregar sus claves ingresando una clave privada o su contraseña maestra.<be/>Alternativamente, puede especificar una cuenta autorizada.",
+    "context": "Text when adding new method."
+  },
+  "popup_html_auth_text": {
+    "message": "Agregue la nueva cuenta especificando una cuenta que tenga autoridad sobre ella y que ya esté guardada en Steem Keychain.",
+    "context": "On Add new account => via auth"
+  },
+  "popup_html_auth_placeholder_username": {
+    "message": "nombre de usuario"
+  },
+  "popup_html_auth_placeholder_username_auth": {
+    "message": "Cuenta autorizada",
+    "context": "The placeholder for the authorized account that will use its keys for this account."
+  },
+  "popup_no_auth_account": {
+    "message": "Ahorre @ $ 1 en Steem Keychain para usarlo como una cuenta autorizada."
+  },
+  "popup_accounts_no_auth": {
+    "message": "@$1 no tiene autoridad sobre @$2.",
+    "context": "When trying to add an account via authority"
+  },
+  "import_html_text": {
+    "message": "Importe sus claves desde otra instancia de Keychain usando un archivo .kc.<br/><br/>Debe usar la misma contraseña maestra en ambas instancias para descifrar las claves."
+  },
+  "import_html_success": {
+    "message": "¡Importaste con éxito tus llaves!"
+  },
+  "import_html_error": {
+    "message": "Hubo un error al importar sus claves.<br/>Asegúrese de que está utilizando la misma clave maestra que cuando exportó el archivo."
+  },
+  "create_new_account": {
+    "message": "Crear una nueva cuenta"
+  },
+  "create_new_account_text": {
+    "message": "Crea una cuenta nueva. Solo se permite una cuenta nueva al instalar KeyChain. Guarde su contraseña maestra y nunca la pierda."
+  },
+  "input_new_account_text": {
+    "message": "InIntroducir nueva cuenta (3~16 caracteres)"
+  },
+  "check_new_account_btn": {
+    "message": "Comprobación de duplicados"
+  },
+  "input_pk_text": {
+    "message": "Introducir contraseña maestra"
+  },
+  "paste_inputed_pk_text": {
+    "message": "Ingrese la contraseña maestra nuevamente"
+  },
+  "create_new_account_btn": {
+    "message": "Crear una cuenta"
+  },
+  "create_account_finished_div": {
+    "message": "¡Se creó una nueva cuenta con éxito!<br/> Debe recordar su cuenta y contraseña maestra. Si los almacenas cada vez que recuperas tu cuenta. <br/> Debes reiniciar Steem Keychain."
+  },
+  "create_account_finished_text": {
+    "message": "Tu nueva cuenta"
+  },
+  "create_account_finished_btn": {
+    "message": "cerrar"
+  },
+  "account_rule_over_3_chars": {
+    "message": "La longitud de la cuenta debe tener más de 3 caracteres"
+  },
+  "account_exists": {
+    "message": "Esta cuenta existe. Usa otro nombre."
+  },
+  "account_can_use": {
+    "message": "Puedes usar esta cuenta!!"
+  },
+  "account_not_match": {
+    "message": "No coincidir la contraseña entre sí"
+  },
+  "account_against_rule": {
+    "message": "Contraseña maestra contra la regla."
+  },
+  "account_fail_to_create": {
+    "message": "No se pudo crear la cuenta."
   }
 }

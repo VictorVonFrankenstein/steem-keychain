@@ -54,6 +54,7 @@ $("#history").text(chrome.i18n.getMessage("popup_html_history"));
 $("#tokens").text(chrome.i18n.getMessage("popup_html_tokens"));
 $("#witness").text(chrome.i18n.getMessage("popup_html_witness"));
 $("#comments").text(chrome.i18n.getMessage("popup_html_comment_history"));
+$("#NFTs").text(chrome.i18n.getMessage("popup_html_nfts"));
 
 $("#acc_transfers .back_menu").text(
   chrome.i18n.getMessage("popup_html_wallet_history")
@@ -61,6 +62,11 @@ $("#acc_transfers .back_menu").text(
 
 $("#acc_comments .back_menu").text(
   chrome.i18n.getMessage("popup_html_comment_history")
+);
+
+$("#nft_page .back_menu").text(chrome.i18n.getMessage("popup_html_nfts"));
+$("#nft_detail_page .back_menu").text(
+  chrome.i18n.getMessage("popup_html_nfts")
 );
 
 // Set up
@@ -433,6 +439,7 @@ $("#witness_toggle").text(chrome.i18n.getMessage("popup_html_support"));
 $("#add_by_keys").text(chrome.i18n.getMessage("popup_html_add_by_keys"));
 $("#add_by_auth").text(chrome.i18n.getMessage("popup_html_add_by_auth"));
 $("#add_import_keys").text(chrome.i18n.getMessage("popup_html_import_keys"));
+$("#create_new_account").text(chrome.i18n.getMessage("create_new_account"));
 
 $("#add_account_types_div p").html(
   chrome.i18n.getMessage("popup_html_chose_add_method")
@@ -458,4 +465,37 @@ $("#add_auth_account_div .back_enabled").text(
 );
 $("#add_auth_account_div button").text(
   chrome.i18n.getMessage("popup_html_save")
+);
+
+// create new  account
+// transfers
+$("#create_account_div .back_enabled").text(
+  chrome.i18n.getMessage("create_new_account")
+);
+$("#create_account_div p").text(
+  chrome.i18n.getMessage("create_new_account_text")
+);
+$("#input_pk_text").text(chrome.i18n.getMessage("input_pk_text"));
+$("#paste_inputed_pk_text").text(
+  chrome.i18n.getMessage("paste_inputed_pk_text")
+);
+$("#check_new_account_btn").text(
+  chrome.i18n.getMessage("check_new_account_btn")
+);
+$("#create_new_account_btn").text(
+  chrome.i18n.getMessage("create_new_account_btn")
+);
+$("#input_new_account_text").text(
+  chrome.i18n.getMessage("input_new_account_text")
+);
+
+// finished create account
+$("#create_account_finished_content").html(
+  chrome.i18n.getMessage("create_account_finished_div")
+);
+$("#create_account_finished_text").text(
+  chrome.i18n.getMessage("create_account_finished_text")
+);
+$("#create_account_finished_btn").text(
+  chrome.i18n.getMessage("create_account_finished_btn")
 );
