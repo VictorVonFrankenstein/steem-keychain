@@ -13,12 +13,13 @@ const setNFTs = async () => {
       let html = "";
 
       nftList.forEach((nft) => {
-        html += `<div class="nft_div" nftid="${nft.id}" nftname="${nft.projectname}">
-      <img
-        class="nft_img"
-        src="https://www.steempunks.xyz/images/punk${nft.id}.png"
-      />
-    </div>`;
+        html += `<div class="nft_div" nftid="${nft.id}" nftname="${nft.projectname}">`;
+        html += `
+                <img
+                  class="nft_img"
+                  src="https://www.steempunks.xyz/images/${nft.image_filename}"
+                />
+              </div>`;
       });
 
       $("#nft_list").html(html);

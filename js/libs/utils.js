@@ -351,7 +351,7 @@ function getNFTList(account) {
       contentType: "application/json",
       type: "POST",
       data: JSON.stringify({
-        query: `{ getMyNFTs(SteemAccountInput: { account: "${account}" }) { success steempunksNFTs { id rarity } } }`,
+        query: `{ getMyNFTs(SteemAccountInput: { account: "${account}" }) { success steempunksNFTs { id rarity image_filename } } }`,
       }),
       success: function (response) {
         console.log("result reust resut ", response);
