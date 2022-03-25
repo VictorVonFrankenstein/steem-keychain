@@ -2,8 +2,8 @@
   "name": "SteemKeychain",
   "description": "Steem keychain",
   "default_locale": "en",
-  "version": "1.0.23",
-  "permissions": ["activeTab", "storage"],
+  "version": "1.0.24",
+  "permissions": ["storage"],
   "browser_action": {
     "default_popup": "html/popup.html",
     "default_icon": "images/steemicon_200.png"
