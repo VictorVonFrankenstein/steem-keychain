@@ -347,11 +347,34 @@ function createNewAccount(account, pk) {
 function getNFTList(account) {
   return new Promise(function (resolve, reject) {
     $.ajax({
-      url: "https://www.steempunks.xyz/graphql",
+      // url: "https://www.steempunks.xyz/graphql",
+      url: "http://localhost:4000/graphql",
       contentType: "application/json",
       type: "POST",
       data: JSON.stringify({
-        query: `{ getMyNFTs(SteemAccountInput: { account: "${account}" }) { success steempunksNFTs { id rarity image_filename } } }`,
+        query: `{ getMyNFTs(SocialDAOsMyNFTInput: { owner_account: "${account}" }) { 
+          success 
+          socialDAOsNFTs { 
+            project_id
+            id
+            pack_no
+            score
+            rarity
+            ranking
+            metadata
+            nft_type
+            mint_account
+            block_num
+            trx_id
+            mint_timestamp
+            mint_block_num
+            mint_trx_id
+            reveal_block_num
+            reveal_trx_id
+            reveal_timestamp
+            owner_account
+            image_filename
+          } } }`,
       }),
       success: function (response) {
         console.log("result reust resut ", response);

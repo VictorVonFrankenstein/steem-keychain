@@ -9,15 +9,20 @@ const setNFTs = async () => {
     const success = myNFTs.data.getMyNFTs.success;
 
     if (success) {
-      const nftList = myNFTs.data.getMyNFTs.steempunksNFTs;
+      const nftList = myNFTs.data.getMyNFTs.socialDAOsNFTs;
       let html = "";
 
       nftList.forEach((nft) => {
+        const imageUrl =
+          nft.image_filename.indexOf("http") > -1
+            ? nft.image_filename
+            : `https://www.steempunks.xyz/images/${nft.image_filename}`;
+
         html += `<div class="nft_div" nftid="${nft.id}" nftname="${nft.projectname}">`;
         html += `
                 <img
                   class="nft_img"
-                  src="https://www.steempunks.xyz/images/${nft.image_filename}"
+                  src="${imageUrl}"
                 />
               </div>`;
       });
