@@ -347,8 +347,7 @@ function createNewAccount(account, pk) {
 function getNFTList(account) {
   return new Promise(function (resolve, reject) {
     $.ajax({
-      // url: "https://www.steempunks.xyz/graphql",
-      url: "http://localhost:4000/graphql",
+      url: "https://www.steempunks.xyz/graphql",
       contentType: "application/json",
       type: "POST",
       data: JSON.stringify({
