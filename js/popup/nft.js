@@ -17,7 +17,7 @@ const setNFTs = async () => {
           const imageUrl =
             nft.image_filename.indexOf("http") > -1
               ? nft.image_filename
-                `https://www.steempunks.xyz/images/${nft.project_id}/${nft.image_filename}`;
+              : `https://www.steempunks.xyz/images/${nft.project_id}/${nft.image_filename}`;
 
           html += `<div class="nft_div" nftid="${nft.id}" nftname="${nft.project_id}">`;
           html += `

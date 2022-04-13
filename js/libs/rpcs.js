@@ -3,20 +3,31 @@ class Rpcs {
     console.log("build");
     this.currentRpc = "https://api.steemit.com";
     this.awaitRollback = false;
-    this.DEFAULT_RPC_API = "https://api.steemkeychain.com/rpc";
+    this.DEFAULT_RPC_API = "https://api.steem.fans";
     this.list = this.initList();
   }
 
   async initList() {
     let listRPC = [];
-    const RPCs = ["DEFAULT", "https://api.steemit.com", "https://steemd.minnowsupportproject.org", "TESTNET", "https://api.hive.blog"];
-    return new Promise(resolve => {
-      chrome.storage.local.get(["rpc"], items => {
+    const RPCs = [
+      // "DEFAULT",
+      "https://api.steemit.com",
+      "https://api.steem.fans",
+      "https://steemd.steemworld.org",
+      "https://api.justyy.com",
+      "https://cn.steems.top",
+      "https://steem.61bts.com",
+      "https://api.steemzzang.com",
+      "TESTNET",
+    ];
+
+    return new Promise((resolve) => {
+      chrome.storage.local.get(["rpc"], (items) => {
         const local = items.rpc;
         listRPC = local != undefined ? JSON.parse(local).concat(RPCs) : RPCs;
         const currentrpc = this.current_rpc || "https://api.steemit.com";
         const list = [currentrpc].concat(
-          listRPC.filter(e => {
+          listRPC.filter((e) => {
             return e != currentrpc;
           })
         );
@@ -41,7 +52,7 @@ class Rpcs {
       steem.api.setOptions({
         url: "https://testnet.steemitdev.com",
         transport: "http",
-        useAppbaseApi: true
+        useAppbaseApi: true,
       });
       steem.config.set("address_prefix", "TST");
       steem.config.set(
@@ -60,13 +71,13 @@ class Rpcs {
         console.log("rpc", rpc);
         steem.api.setOptions({
           url: rpc,
-          useAppbaseApi: true
+          useAppbaseApi: true,
         });
       } else {
         console.log("a", newRpc);
         steem.api.setOptions({
           url: newRpc,
-          useAppbaseApi: true
+          useAppbaseApi: true,
         });
       }
       steem.config.set("address_prefix", "STM");
@@ -94,7 +105,7 @@ class Rpcs {
   async getDefaultRPC() {
     return $.ajax({
       url: this.DEFAULT_RPC_API,
-      type: "GET"
+      type: "GET",
     });
   }
 }
