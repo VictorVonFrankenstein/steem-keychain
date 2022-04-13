@@ -12,20 +12,24 @@ const setNFTs = async () => {
       const nftList = myNFTs.data.getMyNFTs.socialDAOsNFTs;
       let html = "";
 
-      nftList.forEach((nft) => {
-        const imageUrl =
-          nft.image_filename.indexOf("http") > -1
-            ? nft.image_filename
-            : `https://www.steempunks.xyz/images/${nft.image_filename}`;
+      if (nftList.length) {
+        nftList.forEach((nft) => {
+          const imageUrl =
+            nft.image_filename.indexOf("http") > -1
+              ? nft.image_filename
+                `https://www.steempunks.xyz/images/${nft.project_id}/${nft.image_filename}`;
 
-        html += `<div class="nft_div" nftid="${nft.id}" nftname="${nft.projectname}">`;
-        html += `
-                <img
-                  class="nft_img"
-                  src="${imageUrl}"
-                />
-              </div>`;
-      });
+          html += `<div class="nft_div" nftid="${nft.id}" nftname="${nft.project_id}">`;
+          html += `
+                  <img
+                    class="nft_img"
+                    src="${imageUrl}"
+                  />
+                </div>`;
+        });
+      } else {
+        html += "You have no NFT.";
+      }
 
       $("#nft_list").html(html);
 
