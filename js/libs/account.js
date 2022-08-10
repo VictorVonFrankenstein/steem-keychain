@@ -127,7 +127,7 @@ class Account {
     const result = await steem.api.getAccountHistoryAsync(
       this.getName(),
       -1,
-      1000
+      99
     );
     let transfers = result.filter((tx) => tx[1].op[0] === "transfer");
     transfers = transfers.slice(-10).reverse();
@@ -138,7 +138,7 @@ class Account {
     const result = await steem.api.getAccountHistoryAsync(
       this.getName(),
       -1,
-      1000
+      99
     );
     let transfers = result.filter(
       (tx) =>

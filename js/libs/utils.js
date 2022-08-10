@@ -246,9 +246,10 @@ function getPriceSteemAsync() {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
-      url: "https://bittrex.com/api/v1.1/public/getticker?market=BTC-STEEM",
+      url: "https://api.bittrex.com/v3/markets/STEEM-BTC/ticker",
       success: function (response) {
-        resolve(response.result["Bid"]);
+        console.log("steem", response["bidRate"]);
+        resolve(response["bidRate"]);
       },
       error: function (msg) {
         resolve(null);
@@ -266,9 +267,10 @@ function getBTCPriceAsync() {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
-      url: "https://bittrex.com/api/v1.1/public/getticker?market=USDT-BTC",
+      url: "https://api.bittrex.com/v3/markets/BTC-USDT/ticker",
       success: function (response) {
-        resolve(response.result["Bid"]);
+        console.log("btc", response["bidRate"]);
+        resolve(response["bidRate"]);
       },
       error: function (msg) {
         resolve(null);
@@ -286,9 +288,10 @@ function getPriceSBDAsync() {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
-      url: "https://bittrex.com/api/v1.1/public/getticker?market=BTC-SBD",
+      url: "https://api.bittrex.com/v3/markets/SBD-BTC/ticker",
       success: function (response) {
-        resolve(response.result["Bid"]);
+        console.log("sbd", response["bidRate"]);
+        resolve(response["bidRate"]);
       },
       error: function (msg) {
         resolve(null);

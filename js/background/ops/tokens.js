@@ -1,4 +1,4 @@
-const broadcastSendToken = data => {
+const broadcastSendToken = (data) => {
   return new Promise((resolve, reject) => {
     const id = config.mainNet;
     const json = {
@@ -8,8 +8,8 @@ const broadcastSendToken = data => {
         symbol: data.currency,
         to: data.to,
         quantity: data.amount,
-        memo: data.memo
-      }
+        memo: data.memo,
+      },
     };
     steem.broadcast.customJson(
       key,
@@ -18,7 +18,7 @@ const broadcastSendToken = data => {
       id,
       JSON.stringify(json),
       (err, result) => {
-        console.log(result, err);
+        console.log("broadcastSendToken!", result, err);
         const message = createMessage(
           err,
           result,
