@@ -3,7 +3,7 @@ class Rpcs {
     console.log("build");
     this.currentRpc = "https://api.steemit.com";
     this.awaitRollback = false;
-    this.DEFAULT_RPC_API = "https://api.steem.fans";
+    this.DEFAULT_RPC_API = "https://api.steemit.com";
     this.list = this.initList();
   }
 
@@ -12,12 +12,23 @@ class Rpcs {
     const RPCs = [
       // "DEFAULT",
       "https://api.steemit.com",
+      "https://api.steemitdev.com",
+      "https://api.upvu.org",
       "https://api.steem.fans",
       "https://steemd.steemworld.org",
       "https://api.justyy.com",
       "https://cn.steems.top",
+      "https://steemapi.boylikegirl.club",
       "https://steem.61bts.com",
       "https://api.steemzzang.com",
+      "https://api.dlike.io",
+      "https://steemapi.3dkrender.com",
+      "https://api.steemwow.com",
+      "https://api.steem-fanbase.com",
+      "https://api.wherein.io",
+      "https://api.pennsif.net",
+      "https://api.campingclub.me",
+      "https://api.steem.buzz",
       "TESTNET",
     ];
 

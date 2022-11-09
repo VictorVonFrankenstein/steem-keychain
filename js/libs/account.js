@@ -1,6 +1,7 @@
 class Account {
   constructor(obj) {
     this.account = obj || {};
+    this.maxAccountHistoryAmount = 100;
   }
   init() {
     this.info = steem.api.getAccountsAsync([this.account.name]);
@@ -123,12 +124,57 @@ class Account {
     );
   }
 
+  async getAccountHistoryRange(start, count, account) {
+    let array = [];
+
+    try {
+      debugger;
+      const [lastblockno] = await Promise.all([
+        steem.api.getAccountHistoryAsync(account, -1, 0),
+      ]);
+      const tryLength = Math.ceil(count / this.maxAccountHistoryAmount);
+
+      for (let i = 0; i < tryLength; i++) {
+        const beginIdx =
+          lastblockno[0][0] -
+          (tryLength - i - 1) * this.maxAccountHistoryAmount;
+        // i == 0인 경우 총 가져와야할 수량의 짜투리 수량만 가져오게 한다.(501개인 경우 1개, 550개인 경우 50개)
+        // getAccountHistory에는 99를 입력하면 100개를 가지고 온다.
+        const getCount =
+          this.maxAccountHistoryAmount -
+          1 -
+          (i == 0 && count % this.maxAccountHistoryAmount
+            ? this.maxAccountHistoryAmount -
+              (count % this.maxAccountHistoryAmount)
+            : 0);
+
+        const trxs = await steem.api.getAccountHistoryAsync(
+          account,
+          beginIdx,
+          getCount
+        );
+
+        console.log(`Range:${trxs[0][0]} ~ ${trxs[trxs.length - 1][0]}`);
+
+        array = array.concat([...trxs]);
+      }
+
+      console.log("array.length", array.length);
+    } catch (err) {
+      console.log(err);
+      throw "fail to get account history(getAccountHistoryRange)";
+    }
+
+    return array;
+  }
+
   async getTransfers() {
-    const result = await steem.api.getAccountHistoryAsync(
-      this.getName(),
-      -1,
-      99
-    );
+    const result = await this.getAccountHistoryRange(-1, 1000, this.getName());
+    // const result = await steem.api.getAccountHistoryAsync(
+    //   this.getName(),
+    //   -1,
+    //   1000
+    // );
     let transfers = result.filter((tx) => tx[1].op[0] === "transfer");
     transfers = transfers.slice(-10).reverse();
     return transfers;

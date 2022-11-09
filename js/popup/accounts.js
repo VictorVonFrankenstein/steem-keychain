@@ -98,6 +98,10 @@ const showUserData = async () => {
 };
 
 const getAccountHistory = async () => {
+  $("#acc_transfers div")
+    .eq(1)
+    .append("<div><center>Loading...</center></div>");
+
   const transfers = await activeAccount.getTransfers();
   $("#acc_transfers div").eq(1).empty();
   if (transfers.length != 0) {
