@@ -4,36 +4,36 @@ var steem_keychain = {
   requests: {},
   handshake_callback: null,
 
-  requestHandshake: function(callback) {
+  requestHandshake: function (callback) {
     this.handshake_callback = callback;
     this.dispatchCustomEvent("swHandshake", "");
   },
 
-  requestVerifyKey: function(account, message, key, callback, rpc) {
+  requestVerifyKey: function (account, message, key, callback, rpc) {
     var request = {
       type: "decode",
       username: account,
       message: message,
       method: key,
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
-  requestSignBuffer: function(account, message, key, callback, rpc) {
+  requestSignBuffer: function (account, message, key, callback, rpc) {
     var request = {
       type: "signBuffer",
       username: account,
       message: message,
       method: key,
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
-  requestAddAccountAuthority: function(
+  requestAddAccountAuthority: function (
     account,
     authorizedUsername,
     role,
@@ -48,13 +48,13 @@ var steem_keychain = {
       role,
       weight,
       method: "Active",
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
-  requestRemoveAccountAuthority: function(
+  requestRemoveAccountAuthority: function (
     account,
     authorizedUsername,
     role,
@@ -67,12 +67,12 @@ var steem_keychain = {
       authorizedUsername,
       role,
       method: "Active",
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
-  requestAddKeyAuthority: function(
+  requestAddKeyAuthority: function (
     account,
     authorizedKey,
     role,
@@ -87,12 +87,12 @@ var steem_keychain = {
       weight,
       role,
       method: "Active",
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
-  requestRemoveKeyAuthority: function(
+  requestRemoveKeyAuthority: function (
     account,
     authorizedKey,
     role,
@@ -105,25 +105,25 @@ var steem_keychain = {
       authorizedKey,
       role,
       method: "Active",
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
-  requestBroadcast: function(account, operations, key, callback, rpc) {
+  requestBroadcast: function (account, operations, key, callback, rpc) {
     var request = {
       type: "broadcast",
       username: account,
       operations,
       method: key,
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
-  requestSignedCall: function(account, method, params, key, callback, rpc) {
+  requestSignedCall: function (account, method, params, key, callback, rpc) {
     console.log("getting request");
     var request = {
       type: "signedCall",
@@ -131,14 +131,14 @@ var steem_keychain = {
       method,
       params,
       typeWif: key,
-      rpc
+      rpc,
     };
     console.log(request);
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
   // Example comment_options: {"author":"stoodkev","permlink":"hi","max_accepted_payout":"100000.000 SBD","percent_steem_dollars":10000,"allow_votes":true,"allow_curation_rewards":true,"extensions":[[0,{"beneficiaries":[{"account":"yabapmatt","weight":1000},{"account":"steemplus-pay","weight":500}]}]]}
-  requestPost: function(
+  requestPost: function (
     account,
     title,
     body,
@@ -160,25 +160,25 @@ var steem_keychain = {
       json_metadata,
       permlink,
       comment_options,
-      rpc
+      rpc,
     };
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
-  requestVote: function(account, permlink, author, weight, callback, rpc) {
+  requestVote: function (account, permlink, author, weight, callback, rpc) {
     var request = {
       type: "vote",
       username: account,
       permlink,
       author,
       weight,
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
-  requestCustomJson: function(
+  requestCustomJson: function (
     account,
     id,
     key,
@@ -194,12 +194,12 @@ var steem_keychain = {
       method: key, // Posting key is used by default, active can be specified for id=custom .
       json: json, //content of your json
       display_msg: display_msg,
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
-  requestTransfer: function(
+  requestTransfer: function (
     account,
     to,
     amount,
@@ -217,11 +217,11 @@ var steem_keychain = {
       memo,
       enforce,
       currency,
-      rpc
+      rpc,
     };
     this.dispatchCustomEvent("swRequest", request, callback);
   },
-  requestSendToken: function(
+  requestSendToken: function (
     account,
     to,
     amount,
@@ -237,11 +237,11 @@ var steem_keychain = {
       amount,
       memo,
       currency,
-      rpc
+      rpc,
     };
     this.dispatchCustomEvent("swRequest", request, callback);
   },
-  requestDelegation: function(
+  requestDelegation: function (
     username,
     delegatee,
     amount,
@@ -255,41 +255,50 @@ var steem_keychain = {
       delegatee,
       amount,
       unit,
-      rpc
+      rpc,
     };
     this.dispatchCustomEvent("swRequest", request, callback);
   },
-  requestWitnessVote: function(username, witness, vote, callback, rpc) {
+  requestWitnessVote: function (username, witness, vote, callback, rpc) {
     var request = {
       type: "witnessVote",
       username,
       witness,
       vote,
-      rpc
+      rpc,
     };
     this.dispatchCustomEvent("swRequest", request, callback);
   },
-  requestPowerUp: function(username, recipient, steem, callback, rpc) {
+  accountWitnessProxy: function (username, witness, vote, callback, rpc) {
+    var request = {
+      type: "accountWitnessProxy",
+      username,
+      witness,
+      rpc,
+    };
+    this.dispatchCustomEvent("swRequest", request, callback);
+  },
+  requestPowerUp: function (username, recipient, steem, callback, rpc) {
     var request = {
       type: "powerUp",
       username,
       recipient,
       steem,
-      rpc
+      rpc,
     };
     this.dispatchCustomEvent("swRequest", request, callback);
   },
-  requestPowerDown: function(username, steem_power, callback, rpc) {
+  requestPowerDown: function (username, steem_power, callback, rpc) {
     var request = {
       type: "powerDown",
       username,
       steem_power,
-      rpc
+      rpc,
     };
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
-  requestCreateClaimedAccount: function(
+  requestCreateClaimedAccount: function (
     username,
     new_account,
     owner,
@@ -307,14 +316,14 @@ var steem_keychain = {
       active,
       posting,
       memo,
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
   //HF21
-  requestCreateProposal: function(
+  requestCreateProposal: function (
     username,
     receiver,
     subject,
@@ -336,13 +345,13 @@ var steem_keychain = {
       end,
       daily_pay,
       extensions,
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
-  requestRemoveProposal: function(
+  requestRemoveProposal: function (
     username,
     proposal_ids,
     extensions,
@@ -354,12 +363,12 @@ var steem_keychain = {
       username,
       proposal_ids,
       extensions,
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
-  requestUpdateProposalVote: function(
+  requestUpdateProposalVote: function (
     username,
     proposal_ids,
     approve,
@@ -373,33 +382,33 @@ var steem_keychain = {
       proposal_ids,
       approve,
       extensions,
-      rpc
+      rpc,
     };
 
     this.dispatchCustomEvent("swRequest", request, callback);
   },
 
   // Send the customEvent
-  dispatchCustomEvent: function(name, data, callback) {
+  dispatchCustomEvent: function (name, data, callback) {
     this.requests[this.current_id] = callback;
     data = Object.assign(
       {
-        request_id: this.current_id
+        request_id: this.current_id,
       },
       data
     );
     document.dispatchEvent(
       new CustomEvent(name, {
-        detail: data
+        detail: data,
       })
     );
     this.current_id++;
-  }
+  },
 };
 
 window.addEventListener(
   "message",
-  function(event) {
+  function (event) {
     // We only accept messages from ourselves
     if (event.source != window) return;
 

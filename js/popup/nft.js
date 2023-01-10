@@ -43,7 +43,6 @@ const setNFTs = async () => {
       $("#nft_list").html("Fail to get NFTs");
     }
   } catch (error) {
-    console.log("myNFTs error myNFTs error", error);
     $("#nft_list").html("Fail to get NFTs");
   }
 };

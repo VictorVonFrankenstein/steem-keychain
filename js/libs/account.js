@@ -128,7 +128,6 @@ class Account {
     let array = [];
 
     try {
-      debugger;
       const [lastblockno] = await Promise.all([
         steem.api.getAccountHistoryAsync(account, -1, 0),
       ]);

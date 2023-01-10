@@ -1,6 +1,4 @@
 const prepareDelegationTab = async () => {
-  console.log("start prepareDelegationTab============");
-
   const [delegatees, delegators] = [
     await activeAccount.getDelegatees(),
     await activeAccount.getDelegators(),
