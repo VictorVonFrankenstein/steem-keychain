@@ -1,17 +1,17 @@
 let tokens = [];
 let accountTokenBalances = [];
-const urlSSC = ["https://steemapi.cryptoempirebot.com/rpc"];
+const urlSSC = ["https://api.steem-engine.net/rpc"];
 const ssc = new SSC(urlSSC[0]);
 let hidden_tokens = [];
-const steemEngine = "https://steemapi.cryptoempirebot.com/accounts";
+const steemEngine = "https://api.steem-engine.net/accounts";
 const CHAIN_ID = config.mainNet;
 // TODO : extract token logic
-chrome.storage.local.get(["hidden_tokens"], function(items) {
+chrome.storage.local.get(["hidden_tokens"], function (items) {
   if (items.hidden_tokens)
     hidden_tokens = JSON.parse(items.hidden_tokens || []);
 });
 
-getTokens().then(function(tok) {
+getTokens().then(function (tok) {
   tokens = tok;
   for (token of tokens) {
     let html = `<div class='row_existing_tokens'>
@@ -39,21 +39,17 @@ getTokens().then(function(tok) {
   }
   for (token of $(".symbol_token")) {
     if (hidden_tokens.includes($(token).html())) {
-      $(token)
-        .nextAll(".check_row_token")
-        .attr("checked", false);
+      $(token).nextAll(".check_row_token").attr("checked", false);
     }
   }
 
   $(".check_row_token")
     .unbind("change")
-    .change(function() {
-      const nameToken = $(this)
-        .prevAll(".symbol_token")
-        .html();
+    .change(function () {
+      const nameToken = $(this).prevAll(".symbol_token").html();
       console.log(hidden_tokens);
       if ($(this).is(":checked")) {
-        hidden_tokens = hidden_tokens.filter(function(value, index, arr) {
+        hidden_tokens = hidden_tokens.filter(function (value, index, arr) {
           return value != nameToken;
         });
       } else {
@@ -61,18 +57,16 @@ getTokens().then(function(tok) {
       }
       for (symbol of $(".symbol_owned_token")) {
         if (hidden_tokens.includes($(symbol).html()))
-          $(symbol)
-            .parent()
-            .toggle();
+          $(symbol).parent().toggle();
       }
       chrome.storage.local.set({
-        hidden_tokens: JSON.stringify(hidden_tokens)
+        hidden_tokens: JSON.stringify(hidden_tokens),
       });
     });
 });
 
 function showTokenBalances() {
-  getAccountBalances(activeAccount.getName()).then(tokenBalances => {
+  getAccountBalances(activeAccount.getName()).then((tokenBalances) => {
     accountTokenBalances = tokenBalances;
     $("#tokens_list").empty();
     for (token of tokenBalances) {
@@ -89,10 +83,7 @@ function showTokenBalances() {
     }
 
     for (symbol of $(".symbol_owned_token")) {
-      if (hidden_tokens.includes($(symbol).html()))
-        $(symbol)
-          .parent()
-          .hide();
+      if (hidden_tokens.includes($(symbol).html())) $(symbol).parent().hide();
     }
 
     if (tokenBalances.length) {
@@ -113,10 +104,11 @@ function showTokenBalances() {
 
     $(".send_token_icon")
       .unbind("click")
-      .click(function() {
+      .click(function () {
         const symbol = $(this).attr("symbol");
-        const balance = accountTokenBalances.find(e => e.symbol == symbol)
-          .balance;
+        const balance = accountTokenBalances.find(
+          (e) => e.symbol == symbol
+        ).balance;
         $("#token_send_div .back_enabled").html("Send " + symbol);
         $("#tok").html(symbol);
         $(".token_right").html(addCommas(balance));
@@ -126,16 +118,14 @@ function showTokenBalances() {
 
     $(".history_token_icon")
       .unbind("click")
-      .click(function() {
+      .click(function () {
         $("#history_tokens_rows").empty();
-        const symbol = $(this)
-          .prev()
-          .html();
+        const symbol = $(this).prev().html();
         $("#token_history_div .back_enabled").html(symbol + " History");
         $("#token_history_div").show();
         $("#tokens_div").hide();
         $("#loading_history_token").show();
-        getTokenHistory(activeAccount.getName(), 20, 0, symbol).then(function(
+        getTokenHistory(activeAccount.getName(), 20, 0, symbol).then(function (
           history
         ) {
           for (elt of history) {
@@ -184,15 +174,9 @@ function showTokenBalances() {
           $("#loading_history_token").hide();
           $(".history_tokens_row")
             .unbind("click")
-            .click(function() {
-              if (
-                $(this)
-                  .find(".history_memo")
-                  .html() != "null"
-              )
-                $(this)
-                  .find(".history_memo")
-                  .toggle();
+            .click(function () {
+              if ($(this).find(".history_memo").html() != "null")
+                $(this).find(".history_memo").toggle();
             });
         });
       });
@@ -205,7 +189,7 @@ function getTokens() {
 
 function getAccountBalances(account) {
   return ssc.find("tokens", "balances", {
-    account: account
+    account: account,
   });
 }
 
@@ -218,8 +202,8 @@ async function sendToken(account_to, token, amount, memo) {
       symbol: token,
       to: account_to,
       quantity: amount,
-      memo: memo
-    }
+      memo: memo,
+    },
   };
   $("#tok_loading").show();
   if (!(await checkAccountExists(account_to))) {
@@ -233,12 +217,12 @@ async function sendToken(account_to, token, amount, memo) {
     null,
     id,
     JSON.stringify(json),
-    function(err, result) {
+    function (err, result) {
       if (err) {
         $("#tok_loading").hide();
         showError(chrome.i18n.getMessage("unknown_error"));
       } else {
-        tryConfirmTransaction(result.id).then(function(res) {
+        tryConfirmTransaction(result.id).then(function (res) {
           $("#tok_loading").hide();
           if (res && res.confirmed) {
             if (res.error)
@@ -259,7 +243,7 @@ async function sendToken(account_to, token, amount, memo) {
 
 function tryConfirmTransaction(trxId) {
   let result;
-  return new Promise(async function(fulfill, reject) {
+  return new Promise(async function (fulfill, reject) {
     for (let i = 0; i < 20; i++) {
       result = await getDelayedTransactionInfo(trxId);
       if (result != null) break;
@@ -272,20 +256,20 @@ function tryConfirmTransaction(trxId) {
       if (logs.errors && logs.errors.length > 0) error = logs.errors[0];
     }
 
-    fulfill({confirmed: result != null, error: error});
+    fulfill({ confirmed: result != null, error: error });
   });
 }
 
 function getDelayedTransactionInfo(trxID) {
-  return new Promise(function(fulfill, reject) {
-    setTimeout(async function() {
+  return new Promise(function (fulfill, reject) {
+    setTimeout(async function () {
       fulfill(ssc.getTransactionInfo(trxID));
     }, 1000);
   });
 }
 
 // Show Confirmation window before transfer
-$("#send_tok").click(function() {
+$("#send_tok").click(function () {
   confirmTokenTransfer();
 });
 
@@ -305,7 +289,7 @@ function confirmTokenTransfer() {
 }
 
 // Send token to a user
-$("#confirm_send_tok").click(function() {
+$("#confirm_send_tok").click(function () {
   sendToken(
     $("#send_tok_to").val(),
     $("#tok").html(),
@@ -315,8 +299,8 @@ $("#confirm_send_tok").click(function() {
 });
 
 function checkAccountExists(account) {
-  return new Promise(function(fulfill, reject) {
-    steem.api.getAccounts([account], function(err, res) {
+  return new Promise(function (fulfill, reject) {
+    steem.api.getAccounts([account], function (err, res) {
       if (err) reject(err);
       else fulfill(res[0]);
     });
@@ -324,10 +308,10 @@ function checkAccountExists(account) {
 }
 
 function getTokenHistory(account, limit, offset, currency) {
-  return new Promise(function(fulfill, reject) {
+  return new Promise(function (fulfill, reject) {
     $.ajax({
       type: "GET",
-      beforeSend: function(xhttp) {
+      beforeSend: function (xhttp) {
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.setRequestHeader("X-Parse-Application-Id", chrome.runtime.id);
       },
@@ -341,13 +325,13 @@ function getTokenHistory(account, limit, offset, currency) {
         offset +
         "&type=user&symbol=" +
         currency,
-      success: function(tokenHistory) {
+      success: function (tokenHistory) {
         fulfill(tokenHistory);
       },
-      error: function(msg) {
+      error: function (msg) {
         console.log(msg);
         reject(msg);
-      }
+      },
     });
   });
 }
