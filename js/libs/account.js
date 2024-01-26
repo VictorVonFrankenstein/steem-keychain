@@ -1,7 +1,7 @@
 class Account {
   constructor(obj) {
     this.account = obj || {};
-    this.maxAccountHistoryAmount = 100;
+    this.maxAccountHistoryAmount = 20;
   }
   init() {
     this.info = steem.api.getAccountsAsync([this.account.name]);
