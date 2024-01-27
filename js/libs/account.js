@@ -124,19 +124,21 @@ class Account {
     );
   }
 
-  async getAccountHistoryRange(start, count, account) {
+  async getAccountHistoryRange(count, account) {
     let array = [];
 
     try {
-      const [lastblockno] = await Promise.all([
-        steem.api.getAccountHistoryAsync(account, -1, 0),
-      ]);
+      const [lastblockno] = await steem.api.getAccountHistoryAsync(
+        account,
+        -1,
+        0
+      );
+      console.log("lastblockno 2", lastblockno);
       const tryLength = Math.ceil(count / this.maxAccountHistoryAmount);
 
       for (let i = 0; i < tryLength; i++) {
         const beginIdx =
-          lastblockno[0][0] -
-          (tryLength - i - 1) * this.maxAccountHistoryAmount;
+          lastblockno[0] - (tryLength - i - 1) * this.maxAccountHistoryAmount;
         // i == 0인 경우 총 가져와야할 수량의 짜투리 수량만 가져오게 한다.(501개인 경우 1개, 550개인 경우 50개)
         // getAccountHistory에는 99를 입력하면 100개를 가지고 온다.
         const getCount =
@@ -147,15 +149,20 @@ class Account {
               (count % this.maxAccountHistoryAmount)
             : 0);
 
-        const trxs = await steem.api.getAccountHistoryAsync(
-          account,
-          beginIdx,
-          getCount
-        );
+        // 110ms 대기(1초에 10개로 제한되어 있음)
+        await new Promise((resolve) => setTimeout(resolve, 110));
 
-        console.log(`Range:${trxs[0][0]} ~ ${trxs[trxs.length - 1][0]}`);
-
-        array = array.concat([...trxs]);
+        try {
+          const trxs = await steem.api.getAccountHistoryAsync(
+            account,
+            beginIdx,
+            getCount
+          );
+          // console.log(`Range:${trxs[0][0]} ~ ${trxs[trxs.length - 1][0]}`);
+          array = array.concat([...trxs]);
+        } catch {
+          console.log("getAccountHistoryRange error");
+        }
       }
 
       console.log("array.length", array.length);
@@ -167,32 +174,24 @@ class Account {
     return array;
   }
 
-  async getTransfers() {
-    const result = await this.getAccountHistoryRange(-1, 1000, this.getName());
-    // const result = await steem.api.getAccountHistoryAsync(
-    //   this.getName(),
-    //   -1,
-    //   1000
-    // );
+  async getAccountHistory() {
+    const result = await this.getAccountHistoryRange(1000, this.getName());
+
     let transfers = result.filter((tx) => tx[1].op[0] === "transfer");
     transfers = transfers.slice(-10).reverse();
-    return transfers;
-  }
 
-  async getComments() {
-    const result = await steem.api.getAccountHistoryAsync(
-      this.getName(),
-      -1,
-      99
-    );
-    let transfers = result.filter(
+    let comments = result.filter(
       (tx) =>
         tx[1].op[0] === "comment" &&
         tx[1].op[1].parent_author !== "" &&
         tx[1].op[1].author !== this.getName()
     );
-    transfers = transfers.slice(-30).reverse();
-    return transfers;
+    comments = comments.slice(-30).reverse();
+
+    return {
+      transfers,
+      comments,
+    };
   }
 
   async getPowerDown() {
